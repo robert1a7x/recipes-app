@@ -14,11 +14,13 @@ export default function Header({ title, searchButton }) {
       <button
         type="button"
         onClick={ () => history.push('/perfil') }
+        src={ profileIcon }
+        data-testid="profile-top-btn"
+
       >
         <img
           src={ profileIcon }
           alt="profile icon"
-          data-testid="profile-top-btn"
         />
       </button>
       {searchButton && (
@@ -26,6 +28,7 @@ export default function Header({ title, searchButton }) {
           type="button"
           data-testid="search-top-btn"
           onClick={ () => setButton(!button) }
+          src={ searchIcon }
         >
           <img
             src={ searchIcon }
