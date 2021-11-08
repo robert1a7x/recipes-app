@@ -12,11 +12,10 @@ export default function Header({ title, searchButton }) {
     <header>
       <h1 data-testid="page-title">{title}</h1>
       <button
+        data-testid="profile-top-btn"
         type="button"
         onClick={ () => history.push('/perfil') }
         src={ profileIcon }
-        data-testid="profile-top-btn"
-
       >
         <img
           src={ profileIcon }
