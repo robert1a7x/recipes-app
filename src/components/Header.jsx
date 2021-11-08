@@ -12,13 +12,14 @@ export default function Header({ title, searchButton }) {
     <header>
       <h1 data-testid="page-title">{title}</h1>
       <button
+        data-testid="profile-top-btn"
         type="button"
         onClick={ () => history.push('/perfil') }
+        src={ profileIcon }
       >
         <img
           src={ profileIcon }
           alt="profile icon"
-          data-testid="profile-top-btn"
         />
       </button>
       {searchButton && (
@@ -26,6 +27,7 @@ export default function Header({ title, searchButton }) {
           type="button"
           data-testid="search-top-btn"
           onClick={ () => setButton(!button) }
+          src={ searchIcon }
         >
           <img
             src={ searchIcon }
