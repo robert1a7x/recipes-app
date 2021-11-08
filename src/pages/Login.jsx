@@ -13,7 +13,7 @@ export default function Login() {
   function saveIntoLocalStorage() {
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
-    localStorage.setItem('user', { email });
+    localStorage.setItem('user', JSON.stringify({ email }));
   }
 
   return (
