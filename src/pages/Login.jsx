@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
+import isEmail from 'email-format-check';
 
 export default function Login() {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
   function verifyLogin() {
-    const VALID_EMAIL = /\S+@\S+\.\S+/;
     const MIN_LENGTH = 6;
-    return !(password.length > MIN_LENGTH && VALID_EMAIL.test(email));
+    return !(password.length > MIN_LENGTH && isEmail(email));
+  }
+
+  function saveIntoLocalStorage() {
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+    localStorage.setItem('user', { email });
   }
 
   return (
@@ -29,6 +35,7 @@ export default function Login() {
         type="button"
         data-testid="login-submit-btn"
         disabled={ verifyLogin() }
+        onClick={ () => saveIntoLocalStorage() }
       >
         Entrar
       </button>
