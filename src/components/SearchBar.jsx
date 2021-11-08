@@ -2,8 +2,9 @@ import React from 'react';
 
 export default function SearchBar() {
   return (
-    <div>
-      SearchBar
-    </div>
+    <input
+      data-testid="search-input"
+      placeholder="Digite sua pesquisa"
+    />
   );
 }
