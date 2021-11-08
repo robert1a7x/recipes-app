@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import isEmail from 'email-format-check';
+import { useHistory } from 'react-router';
 
 export default function Login() {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const history = useHistory();
 
   function verifyLogin() {
     const MIN_LENGTH = 6;
@@ -35,7 +37,10 @@ export default function Login() {
         type="button"
         data-testid="login-submit-btn"
         disabled={ verifyLogin() }
-        onClick={ () => saveIntoLocalStorage() }
+        onClick={ async () => {
+          await saveIntoLocalStorage();
+          history.push('/comidas');
+        } }
       >
         Entrar
       </button>
