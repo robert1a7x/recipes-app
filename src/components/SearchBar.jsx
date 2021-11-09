@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { useHistory } from 'react-router';
 import { useAppContext } from '../context/Provider';
 import fetchAPI from '../helpers/fetchAPI';
 
 export default function SearchBar() {
+  const history = useHistory();
+
   const {
-    data,
     searchType,
     setData,
     setSearchType,
@@ -13,16 +15,25 @@ export default function SearchBar() {
     pathname, // /comidas ou /bebidas
   } = useAppContext();
 
-  useEffect(() => {
-    console.log(data);
-    console.log(pathname);
-  }, [data]);
-
   async function filterSearch() {
+    if (searchType === 'firstletter' && searchInput.length > 1) {
+      global.alert('Sua busca deve conter somente 1 (um) caracter');
+    }
+
     const results = await (pathname.includes('comidas'))
       ? await fetchAPI('meals', searchType, searchInput)
       : await fetchAPI('drinks', searchType, searchInput);
-    setData(results);
+    if (results) setData(results);
+
+    if (!results) {
+      global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    }
+
+    if (results && results.length === 1) {
+      return history.push(pathname.includes('comidas')
+        ? `${pathname}/${results[0].idMeal}`
+        : `${pathname}/${results[0].idDrink}`);
+    }
   }
 
   return (
