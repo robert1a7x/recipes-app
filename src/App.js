@@ -27,16 +27,16 @@ export default function App() {
         <Route exact path="/" component={ Login } />
         <Route exact path="/comidas" component={ FoodsMainPage } />
         <Route exact path="/bebidas" component={ DrinksMainPage } />
-        <Route exact path="/comidas/:recipeid" component={ FoodDetail } />
-        <Route exact path="/bebidas/:recipeid" component={ DrinkDetail } />
+        <Route exact path="/comidas/:id" component={ FoodDetail } />
+        <Route exact path="/bebidas/:id" component={ DrinkDetail } />
         <Route
           exact
-          path="/comidas/:id-da-receita/in-progress"
+          path="/bebidas/:id/in-progress"
           component={ FoodInProgress }
         />
         <Route
           exact
-          path="/bebidas/:id-da-receita/in-progress"
+          path="/bebidas/:id/in-progress"
           component={ DrinksInProgress }
         />
         <Route exact path="/explorar" component={ Explore } />

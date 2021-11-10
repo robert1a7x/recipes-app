@@ -1,9 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import fetchAPI from '../helpers/fetchAPI';
+import { useAppContext } from '../context/Provider';
 
 export default function FoodDetail() {
-  const params = useParams();
-  console.log(params);
+  const { loading, setLoading } = useAppContext();
+  const { id } = useParams();
+  const [recipeDetails, setRecipeDetails] = useState({});
+
+  useEffect(() => {
+    async function getRecipe() {
+      setLoading(true);
+      const recipe = await fetchAPI('meals', 'details', Number(id));
+      setRecipeDetails(recipe);
+      setLoading(false);
+    }
+    getRecipe();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    console.log(recipeDetails);
+  }, [recipeDetails]);
+
+  if (loading) return <p>Loading...</p>;
   return (
     <div>
       <h1 data-testid="recipe-title">Detalhes da Receita</h1>

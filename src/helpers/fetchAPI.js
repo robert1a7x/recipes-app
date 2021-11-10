@@ -7,6 +7,7 @@ const filter = {
   ingredient: 'filter.php?i=',
   name: 'search.php?s=',
   firstletter: 'search.php?f=',
+  details: 'lookup.php?i=',
 };
 
 export default async function fetchAPI(API, type, value) {
