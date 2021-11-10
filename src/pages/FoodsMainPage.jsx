@@ -12,17 +12,18 @@ export default function FoodMainPage() {
   const { data, setData } = useAppContext();
   const TWELVE_ITEMS = 12;
 
+  const fetchMeals = async () => {
+    setData(await fetchAPI('meals', 'name', ''));
+  };
+
   useEffect(() => {
-    const fetchMeals = async () => {
-      setData(await fetchAPI('meals', 'name', ''));
-    };
     fetchMeals();
   }, [all]);
 
   return (
     <div>
       <Header title="Tela de Comidas" searchButton />
-      <ButtonCategory setAll={ setAll } all={ all } />
+      <ButtonCategory setAll={ setAll } all={ all } fetchRecipes={ fetchMeals } />
       <div>
         { data.map((recipe, index) => (
           (index < TWELVE_ITEMS)

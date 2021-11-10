@@ -11,18 +11,18 @@ export default function DrinksMainPage() {
   const { data, setData } = useAppContext();
   const TWELVE_ITEMS = 12;
 
+  const fetchDrinks = async () => {
+    setData(await fetchAPI('drinks', 'name', ''));
+  };
+
   useEffect(() => {
-    const fetchDrinks = async () => {
-      setData(await fetchAPI('drinks', 'name', ''));
-      console.log(data);
-    };
     fetchDrinks();
   }, [all]);
 
   return (
     <div>
       <Header title="Tela de Bebidas" searchButton />
-      <ButtonCategory setAll={ setAll } all={ all } />
+      <ButtonCategory setAll={ setAll } all={ all } fetchRecipes={ fetchDrinks } />
       <div>
         { data.map((recipe, index) => (
           (index < TWELVE_ITEMS)
