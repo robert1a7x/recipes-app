@@ -1,20 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 export default function RecipeCard({ recipe, index }) {
   return (
     <div data-testid={ `${index}-recipe-card` }>
-      <img
-        data-testid={ `${index}-card-img` }
-        src={ recipe.strMealThumb
-          ? recipe.strMealThumb : recipe.strDrinkThumb }
-        alt="Recipe Thumb"
-      />
-      <h3
-        data-testid={ `${index}-card-name` }
+      <Link
+        to={ recipe.idMeal
+          ? `/comidas/${recipe.idMeal}`
+          : `/bebidas/${recipe.idDrink}` }
       >
-        { recipe.strMeal ? recipe.strMeal : recipe.strDrink }
-      </h3>
+        <img
+          data-testid={ `${index}-card-img` }
+          src={ recipe.strMealThumb || recipe.strDrinkThumb }
+          alt="Recipe Thumb"
+        />
+        <h3
+          data-testid={ `${index}-card-name` }
+        >
+          { recipe.strMeal || recipe.strDrink }
+        </h3>
+      </Link>
     </div>
   );
 }

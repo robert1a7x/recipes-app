@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import fetchAPI from '../helpers/fetchAPI';
 import Footer from '../components/Footer';
 import RecipeCard from '../components/RecipeCard';
 import Header from '../components/Header';
 import { useAppContext } from '../context/Provider';
+import ButtonCategory from '../components/ButtonCategory';
 
 export default function DrinksMainPage() {
-  const { data } = useAppContext();
+  const [all, setAll] = useState(0);
+  const { data, setData } = useAppContext();
   const TWELVE_ITEMS = 12;
+
+  useEffect(() => {
+    const fetchDrinks = async () => {
+      setData(await fetchAPI('drinks', 'name', ''));
+      console.log(data);
+    };
+    fetchDrinks();
+  }, [all]);
+
   return (
     <div>
       <Header title="Tela de Bebidas" searchButton />
+      <ButtonCategory setAll={ setAll } all={ all } />
       <div>
         { data.map((recipe, index) => (
           (index < TWELVE_ITEMS)

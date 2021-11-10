@@ -27,16 +27,16 @@ export default function App() {
         <Route exact path="/" component={ Login } />
         <Route exact path="/comidas" component={ FoodsMainPage } />
         <Route exact path="/bebidas" component={ DrinksMainPage } />
-        <Route exact path="/comidas/:id-da-receita" component={ FoodDetail } />
-        <Route exact path="/bebidas/:id-da-receita" component={ DrinkDetail } />
+        <Route exact path="/comidas/:id" component={ FoodDetail } />
+        <Route exact path="/bebidas/:id" component={ DrinkDetail } />
         <Route
           exact
-          path="/comidas/:id-da-receita}/in-progress"
+          path="/comidas/:id/in-progress"
           component={ FoodInProgress }
         />
         <Route
           exact
-          path="/bebidas/:id-da-receita/in-progress"
+          path="/bebidas/:id/in-progress"
           component={ DrinksInProgress }
         />
         <Route exact path="/explorar" component={ Explore } />
@@ -65,10 +65,10 @@ export default function App() {
   Tela de login: /;
   Tela principal de receitas de comidas: /comidas;
   Tela principal de receitas de bebidas: /bebidas;
-  Tela de detalhes de uma receita de comida: /comidas/{id-da-receita};
-  Tela de detalhes de uma receita de bebida: /bebidas/{id-da-receita};
-  Tela de receita em processo de comida: /comidas/{id-da-receita}/in-progress;
-  Tela de receita em processo de bebida: /bebidas/{id-da-receita}/in-progress;
+  Tela de detalhes de uma receita de comida: /comidas/{id};
+  Tela de detalhes de uma receita de bebida: /bebidas/{id};
+  Tela de receita em processo de comida: /comidas/{id}/in-progress;
+  Tela de receita em processo de bebida: /bebidas/{id}/in-progress;
   Tela de explorar: /explorar;
   Tela de explorar comidas: /explorar/comidas;
   Tela de explorar bebidas: /explorar/bebidas;
