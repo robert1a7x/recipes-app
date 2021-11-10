@@ -7,18 +7,26 @@ export default function Profile() {
   return (
     <div>
       <Header title="Perfil" />
-      <h1>Perfil</h1>
       <h2 data-testid="profile-email">
         { JSON.parse(localStorage.getItem('user')).email }
       </h2>
-      <Link to="">
+      <Link to="/receitas-feitas">
         <button type="button" data-testid="profile-done-btn">
-          
+          Receitas Feitas
         </button>
       </Link>
-      <Link to="">
-        <button type="button" data-testid="profile-done-btn">
-          
+      <Link to="/receitas-favoritas">
+        <button type="button" data-testid="profile-favorite-btn">
+          Receitas Favoritas
+        </button>
+      </Link>
+      <Link to="/">
+        <button
+          type="button"
+          data-testid="profile-logout-btn"
+          onClick={ () => localStorage.clear() }
+        >
+          Sair
         </button>
       </Link>
       <Footer />
