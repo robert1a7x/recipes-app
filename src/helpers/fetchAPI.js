@@ -18,5 +18,3 @@ export default async function fetchAPI(API, type, value) {
     global.alert(error);
   }
 }
-
-console.log(fetchAPI('meals', 'ingredient', 'chicken'));
