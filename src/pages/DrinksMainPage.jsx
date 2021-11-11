@@ -24,7 +24,7 @@ export default function DrinksMainPage() {
       <Header title="Tela de Bebidas" searchButton />
       <ButtonCategory setAll={ setAll } all={ all } fetchRecipes={ fetchDrinks } />
       <div>
-        { data.map((recipe, index) => (
+        { data && data.map((recipe, index) => (
           (index < TWELVE_ITEMS)
           && <RecipeCard key={ index } recipe={ recipe } index={ index } />
         )) }

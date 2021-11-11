@@ -5,7 +5,7 @@ import { useAppContext } from '../context/Provider';
 
 export default function ButtonCategory({ setAll, all, fetchRecipes }) {
   const { pathname, setData } = useAppContext();
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState(null);
   const [stateButton, setStateButton] = useState('');
 
   const CINCO = 5;
@@ -14,12 +14,11 @@ export default function ButtonCategory({ setAll, all, fetchRecipes }) {
       (pathname.includes('comidas'))
         ? setCategories(await fetchAPI('meals', 'list', 'list'))
         : setCategories(await fetchAPI('drinks', 'list', 'list'))
+        // endpoint https://www.themealdb.com/api/json/v1/1/list.php?c=list
     );
     fetchCategories();
+    console.log(categories, 'teste');
   }, []);
-
-  // const verify = (elem) => {
-  // };
 
   const fetchByCategory = async (value) => {
     if (value === stateButton) {
@@ -46,7 +45,7 @@ export default function ButtonCategory({ setAll, all, fetchRecipes }) {
       >
         All
       </button>
-      {categories.length && categories.map((category, index) => (
+      { categories && categories.map((category, index) => (
         index < CINCO && (
           <button
             type="button"
