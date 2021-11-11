@@ -1,9 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
+import fetchAPI from '../helpers/fetchAPI';
+
 export default function ExploreFoods() {
+  const history = useHistory();
+
+  async function generateRandomRecipe() {
+    const recipe = await fetchAPI('meals', 'random');
+    const randomId = `/comidas/${recipe[0].idMeal}`;
+    history.push(randomId);
+  }
+
   return (
     <div>
       <Header title="Explorar Comidas" />
@@ -23,14 +34,13 @@ export default function ExploreFoods() {
           Por Local de Origem
         </button>
       </Link>
-      <Link to="/comidas">
-        <button
-          type="button"
-          data-testid="explore-surprise"
-        >
-          Me Surpreenda!
-        </button>
-      </Link>
+      <button
+        type="button"
+        data-testid="explore-surprise"
+        onClick={ () => generateRandomRecipe() }
+      >
+        Me Surpreenda!
+      </button>
       <Footer />
     </div>
   );
