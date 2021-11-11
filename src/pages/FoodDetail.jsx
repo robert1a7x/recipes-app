@@ -7,50 +7,72 @@ export default function FoodDetail() {
   const { loading, setLoading } = useAppContext();
   const { id } = useParams();
   const [recipeDetails, setRecipeDetails] = useState({});
+  const [drinkRecomendations, setDrinkRecomendations] = useState([]);
+  const ingredients = Object.entries(recipeDetails)
+    .filter((p) => p[0].includes('strIngredient') && p[1])
+    .map((arr) => arr[1]);
+  const measures = Object.entries(recipeDetails)
+    .filter((p) => p[0].includes('strMeasure') && p[1])
+    .map((arr) => arr[1]);
 
   useEffect(() => {
     async function getRecipe() {
       setLoading(true);
       const recipe = await fetchAPI('meals', 'details', Number(id));
-      setRecipeDetails(recipe);
+      const recommendedDrinks = await fetchAPI('drinks', 'recomendations');
+      setRecipeDetails(recipe[0]);
+      setDrinkRecomendations(recommendedDrinks);
       setLoading(false);
     }
     getRecipe();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    console.log(recipeDetails);
-  }, [recipeDetails]);
-
   if (loading) return <p>Loading...</p>;
   return (
     <div>
-      <h1 data-testid="recipe-title">Detalhes da Receita</h1>
+      <h1 data-testid="recipe-title">{ recipeDetails.strMeal }</h1>
       <img
         data-testid="recipe-photo"
-        // src={ /* */ }
-        alt="Receita"
+        src={ recipeDetails.strMealThumb }
+        alt={ `${recipeDetails.strMeal} Recipe` }
       />
-      <button type="button" data-testid="share-btn">
-        Compartilhar
-      </button>
-      <button
-        type="button"
-        data-testid="favorite-btn"
-      >
-        Favoritar receita
-      </button>
-      <span data-testid="recipe-category">{}</span>
+      <div>
+        <button type="button" data-testid="share-btn">
+          Compartilhar
+        </button>
+        <button
+          type="button"
+          data-testid="favorite-btn"
+        >
+          Favoritar receita
+        </button>
+      </div>
+      <h2 data-testid="recipe-category">{ recipeDetails.strCategory }</h2>
       <ul>
-        { /* */}
+        { ingredients && ingredients.map((ingredient, index) => (
+          <li key={ ingredient } data-testid={ `${index}-ingredient-name-and-measure` }>
+            { ingredients[index] + measures[index] }
+          </li>
+        ))}
       </ul>
-      <p data-testid="instructions">{}</p>
-      {/* <iframe src={} data-testid="video"/> */}
+      <p data-testid="instructions">{ recipeDetails.strInstructions }</p>
+      <iframe
+        src={ recipeDetails.strYoutube }
+        title="video"
+        data-testid="video"
+      />
       <div>
         <span>Receitas Recomendadas</span>
         <ul>
-          {/* {} data-testid="${index}-recomendation-card";  */}
+          { ingredients.map((something, index) => (
+            <li
+              key={ something }
+              data-testid={ `${index}-recomendation-card` }
+            >
+              { something }
+            </li>
+          ))}
         </ul>
       </div>
       <button

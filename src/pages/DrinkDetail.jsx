@@ -7,12 +7,21 @@ export default function DrinkDetail() {
   const { loading, setLoading } = useAppContext();
   const { id } = useParams();
   const [recipeDetails, setRecipeDetails] = useState({});
+  const [foodRecomendations, setFoodRecomendations] = useState([]);
+  const ingredients = Object.entries(recipeDetails)
+    .filter((p) => p[0].includes('strIngredient') && p[1])
+    .map((arr) => arr[1]);
+  const measures = Object.entries(recipeDetails)
+    .filter((p) => p[0].includes('strMeasure') && p[1])
+    .map((arr) => arr[1]);
 
   useEffect(() => {
     async function getRecipe() {
       setLoading(true);
       const recipe = await fetchAPI('drinks', 'details', Number(id));
-      setRecipeDetails(recipe);
+      const recommendedFoods = await fetchAPI('meals', 'recomendations');
+      setRecipeDetails(recipe[0]);
+      setFoodRecomendations(recommendedFoods);
       setLoading(false);
     }
     getRecipe();
@@ -22,10 +31,10 @@ export default function DrinkDetail() {
   if (loading) return <p>Loading...</p>;
   return (
     <div>
-      <h1 data-testid="recipe-title">Detalhes da Receita</h1>
+      <h1 data-testid="recipe-title">{recipeDetails.strDrink }</h1>
       <img
         data-testid="recipe-photo"
-        // src={ /* */ }
+        src={ recipeDetails.strDrinkThumb }
         alt="Receita"
       />
       <button type="button" data-testid="share-btn">
@@ -37,15 +46,28 @@ export default function DrinkDetail() {
       >
         Favoritar receita
       </button>
-      <span data-testid="recipe-category">{}</span>
+      <span data-testid="recipe-category">
+        { recipeDetails.strAlcoholic ? 'Alcoholic' : recipeDetails.strCategory }
+      </span>
       <ul>
-        { /* */}
+        { ingredients && ingredients.map((ingredient, index) => (
+          <li key={ ingredient } data-testid={ `${index}-ingredient-name-and-measure` }>
+            { ingredients[index] + measures[index] }
+          </li>
+        ))}
       </ul>
-      <p data-testid="instructions">{}</p>
+      <p data-testid="instructions">{recipeDetails.strInstructions }</p>
       <div>
         <span>Receitas Recomendadas</span>
         <ul>
-          {/* {} data-testid="${index}-recomendation-card";  */}
+          { ingredients.map((something, index) => ( // QUAL A CHAVE NO OBJETO DA API???????? (Ñ É INGREDIENTS)
+            <li
+              key={ something }
+              data-testid={ `${index}-recomendation-card` }
+            >
+              { something }
+            </li>
+          ))}
         </ul>
       </div>
       <button
