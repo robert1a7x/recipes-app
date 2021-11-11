@@ -12,10 +12,10 @@ export default function Login() {
     return !(password.length > MIN_LENGTH && isEmail(email));
   }
 
-  function saveIntoLocalStorage() {
-    localStorage.setItem('mealsToken', 1);
-    localStorage.setItem('cocktailsToken', 1);
-    localStorage.setItem('user', JSON.stringify({ email }));
+  async function saveIntoLocalStorage() {
+    await localStorage.setItem('mealsToken', 1);
+    await localStorage.setItem('cocktailsToken', 1);
+    await localStorage.setItem('user', JSON.stringify({ email }));
   }
 
   return (
