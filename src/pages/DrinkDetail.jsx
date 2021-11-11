@@ -1,13 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 import fetchAPI from '../helpers/fetchAPI';
 import { useAppContext } from '../context/Provider';
+import Recommendations from '../components/Recommendations';
+
+import '../Detail.css';
 
 export default function DrinkDetail() {
   const { loading, setLoading } = useAppContext();
   const { id } = useParams();
   const [recipeDetails, setRecipeDetails] = useState({});
   const [foodRecomendations, setFoodRecomendations] = useState([]);
+  const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+  // const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  const isDone = doneRecipes ? doneRecipes
+    .filter((obj) => obj.id === id)
+    : localStorage.setItem('doneRecipes', JSON.stringify([]));
+  // const isInProgress = inProgressRecipes ? Object.keys(inProgressRecipes.cocktails)
+  //   .some((item) === id)
+  //   : localStorage.setItem('doneRecipes', JSON.stringify([]));
   const ingredients = Object.entries(recipeDetails)
     .filter((p) => p[0].includes('strIngredient') && p[1])
     .map((arr) => arr[1]);
@@ -17,9 +29,12 @@ export default function DrinkDetail() {
 
   useEffect(() => {
     async function getRecipe() {
+      const MAX_RECOMENDATIONS = 6;
       setLoading(true);
       const recipe = await fetchAPI('drinks', 'details', Number(id));
-      const recommendedFoods = await fetchAPI('meals', 'recomendations');
+      const foodsResponse = await fetchAPI('meals', 'recomendations');
+      const recommendedFoods = await foodsResponse
+        .filter((elem, index) => index < MAX_RECOMENDATIONS);
       setRecipeDetails(recipe[0]);
       setFoodRecomendations(recommendedFoods);
       setLoading(false);
@@ -57,25 +72,22 @@ export default function DrinkDetail() {
         ))}
       </ul>
       <p data-testid="instructions">{recipeDetails.strInstructions }</p>
-      <div>
-        <span>Receitas Recomendadas</span>
-        <ul>
-          { ingredients.map((something, index) => ( // QUAL A CHAVE NO OBJETO DA API???????? (Ñ É INGREDIENTS)
-            <li
-              key={ something }
-              data-testid={ `${index}-recomendation-card` }
-            >
-              { something }
-            </li>
-          ))}
-        </ul>
-      </div>
-      <button
-        type="button"
-        data-testid="start-recipe-btn"
-      >
-        Iniciar Receita
-      </button>
+      <iframe
+        src={ recipeDetails.strYoutube }
+        title="video"
+        data-testid="video"
+      />
+      <Recommendations items={ foodRecomendations } />
+      { isDone && (
+        <Link to={ `/bebidas/${recipeDetails.idDrink}/in-progress` }>
+          <button
+            className="iniciar-receita"
+            type="button"
+            data-testid="start-recipe-btn"
+          >
+            Iniciar Receita
+          </button>
+        </Link>)}
     </div>
   );
 }

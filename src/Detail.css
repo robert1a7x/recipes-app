@@ -1,0 +1,45 @@
+.iniciar-receita {
+  bottom: 0;  
+  position: fixed;
+}
+
+.slick-prev {
+  position: absolute !important;
+  bottom: 20px !important;
+  top: initial !important;
+  right: 70px !important;
+  left: initial !important;
+}
+
+.slick-next {
+  position: absolute !important;
+  bottom: 20px !important;
+  top: initial !important;
+  right: 40px !important;
+  left: initial !important;
+}
+
+.carousel {
+  display: flex;
+  min-width: 95vw;
+  overflow-x: auto;
+  padding: 10px;
+  scroll-snap-type: x mandatory;
+}
+
+.carousel-item {
+  flex: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-align: start;
+  width: 55vw;
+}
+
+.carousel-item img {
+  width: 45vw;
+}
+
+.startButton {
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+}

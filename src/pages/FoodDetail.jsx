@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useParams } from 'react-router';
 import fetchAPI from '../helpers/fetchAPI';
 import { useAppContext } from '../context/Provider';
+import Recommendations from '../components/Recommendations';
+
+import '../Detail.css';
 
 export default function FoodDetail() {
   const { loading, setLoading } = useAppContext();
   const { id } = useParams();
   const [recipeDetails, setRecipeDetails] = useState({});
   const [drinkRecomendations, setDrinkRecomendations] = useState([]);
+  const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+  const isDone = doneRecipes ? doneRecipes
+    .filter((obj) => obj.id === id)
+    : localStorage.setItem('doneRecipes', JSON.stringify([]));
   const ingredients = Object.entries(recipeDetails)
     .filter((p) => p[0].includes('strIngredient') && p[1])
     .map((arr) => arr[1]);
@@ -17,9 +25,12 @@ export default function FoodDetail() {
 
   useEffect(() => {
     async function getRecipe() {
+      const MAX_RECOMENDATIONS = 6;
       setLoading(true);
       const recipe = await fetchAPI('meals', 'details', Number(id));
-      const recommendedDrinks = await fetchAPI('drinks', 'recomendations');
+      const drinksResponse = await fetchAPI('drinks', 'recomendations');
+      const recommendedDrinks = await drinksResponse
+        .filter((elem, index) => index < MAX_RECOMENDATIONS);
       setRecipeDetails(recipe[0]);
       setDrinkRecomendations(recommendedDrinks);
       setLoading(false);
@@ -36,6 +47,7 @@ export default function FoodDetail() {
         data-testid="recipe-photo"
         src={ recipeDetails.strMealThumb }
         alt={ `${recipeDetails.strMeal} Recipe` }
+        width={ 200 }
       />
       <div>
         <button type="button" data-testid="share-btn">
@@ -62,25 +74,17 @@ export default function FoodDetail() {
         title="video"
         data-testid="video"
       />
-      <div>
-        <span>Receitas Recomendadas</span>
-        <ul>
-          { ingredients.map((something, index) => (
-            <li
-              key={ something }
-              data-testid={ `${index}-recomendation-card` }
-            >
-              { something }
-            </li>
-          ))}
-        </ul>
-      </div>
-      <button
-        type="button"
-        data-testid="start-recipe-btn"
-      >
-        Iniciar Receita
-      </button>
+      <Recommendations items={ drinkRecomendations } />
+      { isDone && (
+        <Link to={ `/bebidas/${recipeDetails.idDrink}/in-progress` }>
+          <button
+            className="iniciar-receita"
+            type="button"
+            data-testid="start-recipe-btn"
+          >
+            Iniciar Receita
+          </button>
+        </Link>)}
     </div>
   );
 }

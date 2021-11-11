@@ -31,7 +31,7 @@ export default function App() {
         <Route exact path="/bebidas/:id" component={ DrinkDetail } />
         <Route
           exact
-          path="/bebidas/:id/in-progress"
+          path="/comidas/:id/in-progress"
           component={ FoodInProgress }
         />
         <Route
