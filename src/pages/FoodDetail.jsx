@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useParams } from 'react-router';
+import { useParams, useLocation } from 'react-router';
+import copy from 'clipboard-copy';
 import fetchAPI from '../helpers/fetchAPI';
 import { useAppContext } from '../context/Provider';
 import Recommendations from '../components/Recommendations';
 
 import '../Detail.css';
+import shareIcon from '../images/shareIcon.svg';
+// import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+// import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 export default function FoodDetail() {
   const { loading, setLoading } = useAppContext();
   const { id } = useParams();
+  const { pathname } = useLocation();
   const [recipeDetails, setRecipeDetails] = useState({});
+  const [clicked, setClicked] = useState(false);
   const [drinkRecomendations, setDrinkRecomendations] = useState([]);
   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
   const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
@@ -55,8 +61,15 @@ export default function FoodDetail() {
         width={ 200 }
       />
       <div>
-        <button type="button" data-testid="share-btn">
-          Compartilhar
+        <button
+          type="button"
+          data-testid="share-btn"
+          onClick={ () => {
+            copy(`http://localhost:3000${pathname}`);
+            setClicked(true);
+          } }
+        >
+          { clicked ? 'Link copiado!' : <img src={ shareIcon } alt="Share icon" /> }
         </button>
         <button
           type="button"
