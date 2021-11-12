@@ -13,13 +13,14 @@ export default function DrinkDetail() {
   const [recipeDetails, setRecipeDetails] = useState({});
   const [foodRecomendations, setFoodRecomendations] = useState([]);
   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-  // const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
   const isDone = doneRecipes ? doneRecipes
     .filter((obj) => obj.id === id)
     : localStorage.setItem('doneRecipes', JSON.stringify([]));
-  // const isInProgress = inProgressRecipes ? Object.keys(inProgressRecipes.cocktails)
-  //   .some((item) === id)
-  //   : localStorage.setItem('doneRecipes', JSON.stringify([]));
+  const isInProgress = inProgressRecipes ? Object.keys(inProgressRecipes.cocktails)
+    .some((item) => item === id)
+    : localStorage
+      .setItem('inProgressRecipes', JSON.stringify({ cocktails: {}, meals: {} }));
   const ingredients = Object.entries(recipeDetails)
     .filter((p) => p[0].includes('strIngredient') && p[1])
     .map((arr) => arr[1]);
@@ -34,7 +35,7 @@ export default function DrinkDetail() {
       const recipe = await fetchAPI('drinks', 'details', Number(id));
       const foodsResponse = await fetchAPI('meals', 'recomendations');
       const recommendedFoods = await foodsResponse
-        .filter((elem, index) => index < MAX_RECOMENDATIONS);
+        .filter((_elem, index) => index < MAX_RECOMENDATIONS);
       setRecipeDetails(recipe[0]);
       setFoodRecomendations(recommendedFoods);
       setLoading(false);
@@ -46,7 +47,7 @@ export default function DrinkDetail() {
   if (loading) return <p>Loading...</p>;
   return (
     <div>
-      <h1 data-testid="recipe-title">{recipeDetails.strDrink }</h1>
+      <h1 data-testid="recipe-title">{ recipeDetails.strDrink }</h1>
       <img
         data-testid="recipe-photo"
         src={ recipeDetails.strDrinkThumb }
@@ -72,11 +73,6 @@ export default function DrinkDetail() {
         ))}
       </ul>
       <p data-testid="instructions">{recipeDetails.strInstructions }</p>
-      <iframe
-        src={ recipeDetails.strYoutube }
-        title="video"
-        data-testid="video"
-      />
       <Recommendations items={ foodRecomendations } />
       { isDone && (
         <Link to={ `/bebidas/${recipeDetails.idDrink}/in-progress` }>
@@ -85,7 +81,7 @@ export default function DrinkDetail() {
             type="button"
             data-testid="start-recipe-btn"
           >
-            Iniciar Receita
+            { isInProgress ? 'Continuar Receita' : 'Iniciar Receita' }
           </button>
         </Link>)}
     </div>

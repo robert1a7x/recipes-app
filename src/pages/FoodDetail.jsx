@@ -13,9 +13,14 @@ export default function FoodDetail() {
   const [recipeDetails, setRecipeDetails] = useState({});
   const [drinkRecomendations, setDrinkRecomendations] = useState([]);
   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+  const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
   const isDone = doneRecipes ? doneRecipes
     .filter((obj) => obj.id === id)
     : localStorage.setItem('doneRecipes', JSON.stringify([]));
+  const isInProgress = inProgressRecipes ? Object.keys(inProgressRecipes.meals)
+    .some((item) => item === id)
+    : localStorage
+      .setItem('inProgressRecipes', JSON.stringify({ cocktails: {}, meals: {} }));
   const ingredients = Object.entries(recipeDetails)
     .filter((p) => p[0].includes('strIngredient') && p[1])
     .map((arr) => arr[1]);
@@ -30,7 +35,7 @@ export default function FoodDetail() {
       const recipe = await fetchAPI('meals', 'details', Number(id));
       const drinksResponse = await fetchAPI('drinks', 'recomendations');
       const recommendedDrinks = await drinksResponse
-        .filter((elem, index) => index < MAX_RECOMENDATIONS);
+        .filter((_elem, index) => index < MAX_RECOMENDATIONS);
       setRecipeDetails(recipe[0]);
       setDrinkRecomendations(recommendedDrinks);
       setLoading(false);
@@ -70,34 +75,23 @@ export default function FoodDetail() {
       </ul>
       <p data-testid="instructions">{ recipeDetails.strInstructions }</p>
       <iframe
-        src={ recipeDetails.strYoutube }
-        title="video"
         data-testid="video"
+        width="560"
+        height="315"
+        src={ `https://www.youtube.com/embed/${recipeDetails.strYoutube.split('=')[1]}` }
+        title="YouTube video player"
       />
       <Recommendations items={ drinkRecomendations } />
       { isDone && (
-        <Link to={ `/bebidas/${recipeDetails.idDrink}/in-progress` }>
+        <Link to={ `/comidas/${recipeDetails.idMeal}/in-progress` }>
           <button
             className="iniciar-receita"
             type="button"
             data-testid="start-recipe-btn"
           >
-            Iniciar Receita
+            { isInProgress ? 'Continuar Receita' : 'Iniciar Receita' }
           </button>
         </Link>)}
     </div>
   );
 }
-
-/*
-  A foto deve possuir o atributo data-testid="recipe-photo";
-  O título deve possuir o atributo data-testid="recipe-title";
-  O botão de compartilhar deve possuir o atributo data-testid="share-btn";
-  O botão de favoritar deve possuir o atributo data-testid="favorite-btn";
-  O texto da categoria deve possuir o atributo data-testid="recipe-category";
-  Os ingredientes devem possuir o atributo data-testid="${index}-ingredient-name-and-measure";
-  O texto de instruções deve possuir o atributo data-testid="instructions";
-  O vídeo, presente somente na tela de comidas, deve possuir o atributo data-testid="video";
-  O card de receitas recomendadas deve possuir o atributo data-testid="${index}-recomendation-card";
-  O botão de iniciar receita deve possuir o atributo data-testid="start-recipe-btn";
-*/
