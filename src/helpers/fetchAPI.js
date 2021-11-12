@@ -20,3 +20,5 @@ export default async function fetchAPI(API, type, value = '') {
     console.error(error);
   }
 }
+
+console.log(fetchAPI('drinks', 'details', Number('178319')));

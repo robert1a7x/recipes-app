@@ -57,6 +57,22 @@ export default function FoodDetail() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  function saveFavorite() {
+    const newFavoriteMeal = [
+      ...favoriteRecipes,
+      {
+        id: recipeDetails.idMeal,
+        type: 'comida',
+        area: recipeDetails.strArea,
+        category: recipeDetails.strCategory,
+        alcoholicOrNot: '',
+        name: recipeDetails.strMeal,
+        image: recipeDetails.strMealThumb,
+      },
+    ];
+    localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteMeal));
+  }
+
   if (loading) return <p>Loading...</p>;
   return (
     <div>
@@ -80,6 +96,7 @@ export default function FoodDetail() {
         </button>
         <button
           type="button"
+          onClick={ () => saveFavorite() }
         >
           <img
             data-testid="favorite-btn"

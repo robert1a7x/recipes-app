@@ -57,6 +57,22 @@ export default function DrinkDetail() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  function saveFavorite() {
+    const newFavoriteMeal = [
+      ...favoriteRecipes,
+      {
+        id: recipeDetails.idDrink,
+        type: 'bebida',
+        area: '',
+        category: recipeDetails.strCategory ? recipeDetails.strCategory : '',
+        alcoholicOrNot: recipeDetails.strAlcoholic,
+        name: recipeDetails.strDrink,
+        image: recipeDetails.strDrinkThumb,
+      },
+    ];
+    localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteMeal));
+  }
+
   if (loading) return <p>Loading...</p>;
   return (
     <div>
@@ -78,6 +94,7 @@ export default function DrinkDetail() {
       </button>
       <button
         type="button"
+        onClick={ () => saveFavorite() }
       >
         <img
           data-testid="favorite-btn"
