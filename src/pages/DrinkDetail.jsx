@@ -8,8 +8,8 @@ import Recommendations from '../components/Recommendations';
 
 import '../Detail.css';
 import shareIcon from '../images/shareIcon.svg';
-// import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-// import blackHeartIcon from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 export default function DrinkDetail() {
   const { loading, setLoading } = useAppContext();
@@ -18,8 +18,11 @@ export default function DrinkDetail() {
   const [recipeDetails, setRecipeDetails] = useState({});
   const [clicked, setClicked] = useState(false);
   const [foodRecomendations, setFoodRecomendations] = useState([]);
+
   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
   const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+
   const isDone = doneRecipes ? doneRecipes
     .filter((obj) => obj.id === id)
     : localStorage.setItem('doneRecipes', JSON.stringify([]));
@@ -27,6 +30,10 @@ export default function DrinkDetail() {
     .some((item) => item === id)
     : localStorage
       .setItem('inProgressRecipes', JSON.stringify({ cocktails: {}, meals: {} }));
+  const isFavorite = favoriteRecipes ? favoriteRecipes
+    .some((obj) => obj.id === id)
+    : localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+
   const ingredients = Object.entries(recipeDetails)
     .filter((p) => p[0].includes('strIngredient') && p[1])
     .map((arr) => arr[1]);
@@ -71,9 +78,12 @@ export default function DrinkDetail() {
       </button>
       <button
         type="button"
-        data-testid="favorite-btn"
       >
-        Favoritar receita
+        <img
+          data-testid="favorite-btn"
+          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+          alt="favorite icon"
+        />
       </button>
       <span data-testid="recipe-category">
         { recipeDetails.strAlcoholic ? 'Alcoholic' : recipeDetails.strCategory }
