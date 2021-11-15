@@ -17,6 +17,7 @@ export default function DrinkDetail() {
   const { pathname } = useLocation();
   const [recipeDetails, setRecipeDetails] = useState({});
   const [clicked, setClicked] = useState(false);
+  const [favorite, setFavorite] = useState();
   const [foodRecomendations, setFoodRecomendations] = useState([]);
 
   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -52,6 +53,7 @@ export default function DrinkDetail() {
       setRecipeDetails(recipe[0]);
       setFoodRecomendations(recommendedFoods);
       setLoading(false);
+      setFavorite(isFavorite);
     }
     getRecipe();
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -71,6 +73,7 @@ export default function DrinkDetail() {
       },
     ];
     localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteMeal));
+    setFavorite(!favorite);
   }
 
   if (loading) return <p>Loading...</p>;
@@ -98,7 +101,7 @@ export default function DrinkDetail() {
       >
         <img
           data-testid="favorite-btn"
-          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+          src={ favorite ? blackHeartIcon : whiteHeartIcon }
           alt="favorite icon"
         />
       </button>

@@ -17,6 +17,7 @@ export default function FoodDetail() {
   const { pathname } = useLocation();
   const [recipeDetails, setRecipeDetails] = useState({});
   const [clicked, setClicked] = useState(false);
+  const [favorite, setFavorite] = useState();
   const [drinkRecomendations, setDrinkRecomendations] = useState([]);
 
   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -51,6 +52,7 @@ export default function FoodDetail() {
         .filter((_elem, index) => index < MAX_RECOMENDATIONS);
       setRecipeDetails(recipe[0]);
       setDrinkRecomendations(recommendedDrinks);
+      setFavorite(isFavorite);
       setLoading(false);
     }
     getRecipe();
@@ -71,6 +73,7 @@ export default function FoodDetail() {
       },
     ];
     localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteMeal));
+    setFavorite(!favorite);
   }
 
   if (loading) return <p>Loading...</p>;
@@ -100,7 +103,7 @@ export default function FoodDetail() {
         >
           <img
             data-testid="favorite-btn"
-            src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+            src={ favorite ? blackHeartIcon : whiteHeartIcon }
             alt="favorite icon"
           />
         </button>
