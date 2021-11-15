@@ -1,22 +1,22 @@
 .iniciar-receita {
-  bottom: 0;  
+  bottom: 0;
   position: fixed;
 }
 
 .slick-prev {
-  position: absolute !important;
-  bottom: 20px !important;
-  top: initial !important;
-  right: 70px !important;
-  left: initial !important;
+  bottom: 20px;
+  left: initial;
+  position: absolute;
+  right: 70px;
+  top: initial;
 }
 
 .slick-next {
-  position: absolute !important;
-  bottom: 20px !important;
-  top: initial !important;
-  right: 40px !important;
-  left: initial !important;
+  bottom: 20px;
+  left: initial;
+  position: absolute;
+  right: 40px;
+  top: initial;
 }
 
 .carousel {
