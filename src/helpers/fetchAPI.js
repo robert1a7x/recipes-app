@@ -9,6 +9,7 @@ const filter = {
   firstletter: 'search.php?f=',
   details: 'lookup.php?i=',
   recomendations: 'search.php?s=',
+  random: 'random.php',
 };
 
 export default async function fetchAPI(API, type, value = '') {
