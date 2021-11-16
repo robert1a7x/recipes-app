@@ -6,7 +6,6 @@ export default function IngredientCard({ ingredient, index }) {
   const { strIngredient, strIngredient1 } = ingredient;
   const srcMeal = `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png`;
   const srcDrink = `https://www.thecocktaildb.com/images/ingredients/${strIngredient1}-Small.png`;
-  console.log(srcDrink);
   return (
     <div data-testid={ `${index}-ingredient-card` }>
       {/* <Link
@@ -16,7 +15,7 @@ export default function IngredientCard({ ingredient, index }) {
       > */}
       <img
         data-testid={ `${index}-card-img` }
-        src={ srcMeal || srcDrink }
+        src={ strIngredient ? srcMeal : srcDrink }
         alt="Ingredient Thumb"
       />
       <h3
