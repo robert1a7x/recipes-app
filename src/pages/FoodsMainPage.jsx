@@ -13,11 +13,18 @@ export default function FoodMainPage() {
   const TWELVE_ITEMS = 12;
 
   const fetchMeals = async () => {
-    if (!data) return setData(await fetchAPI('meals', 'name', ''));
+    setData(await fetchAPI('meals', 'name', ''));
   };
 
   useEffect(() => {
-    fetchMeals();
+    if (data) return setAll(0);
+    setAll(1);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (all > 0) fetchMeals();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [all]);
 
   return (

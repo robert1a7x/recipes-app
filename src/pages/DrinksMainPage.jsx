@@ -12,11 +12,18 @@ export default function DrinksMainPage() {
   const TWELVE_ITEMS = 12;
 
   const fetchDrinks = async () => {
-    if (!data) return setData(await fetchAPI('drinks', 'name', ''));
+    setData(await fetchAPI('drinks', 'name', ''));
   };
 
   useEffect(() => {
-    fetchDrinks();
+    if (data) return setAll(0);
+    setAll(1);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (all > 0) fetchDrinks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [all]);
 
   return (
