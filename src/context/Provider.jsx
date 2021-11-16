@@ -8,6 +8,7 @@ export default function Provider({ children }) {
   const [data, setData] = useState(null);
   const [searchType, setSearchType] = useState();
   const [searchInput, setSearchInput] = useState();
+  const [loading, setLoading] = useState(true);
   const { pathname } = useLocation();
 
   const contextValue = {
@@ -18,6 +19,8 @@ export default function Provider({ children }) {
     searchInput,
     pathname,
     searchType,
+    loading,
+    setLoading,
   };
 
   return (
