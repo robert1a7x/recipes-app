@@ -26,7 +26,9 @@ export default function ExploreFoodsByArea() {
 
   useEffect(() => {
     async function getData() {
-      const response = await fetchAPI('meals', 'area', selectedCategory);
+      const response = selectedCategory === 'All'
+        ? await fetchAPI('meals', 'name', '')
+        : await fetchAPI('meals', 'area', selectedCategory);
       setRecipes(response);
     }
     getData();
@@ -41,6 +43,7 @@ export default function ExploreFoodsByArea() {
         data-testid="explore-by-area-dropdown"
         onChange={ (e) => setSelectedCategory(e.target.value) }
       >
+        <option value="All" data-testid="All-option">All</option>
         {categories.map(({ strArea }) => (
           <option value={ strArea } data-testid={ `${strArea}-option` } key={ strArea }>
             { strArea }
