@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 export const AppContext = React.createContext();
 
 export default function Provider({ children }) {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   const [searchType, setSearchType] = useState();
   const [searchInput, setSearchInput] = useState();
   const [loading, setLoading] = useState(true);
