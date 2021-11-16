@@ -60,22 +60,3 @@ export default function App() {
     </Provider>
   );
 }
-/*
-
-  Tela de login: /;
-  Tela principal de receitas de comidas: /comidas;
-  Tela principal de receitas de bebidas: /bebidas;
-  Tela de detalhes de uma receita de comida: /comidas/{id};
-  Tela de detalhes de uma receita de bebida: /bebidas/{id};
-  Tela de receita em processo de comida: /comidas/{id}/in-progress;
-  Tela de receita em processo de bebida: /bebidas/{id}/in-progress;
-  Tela de explorar: /explorar;
-  Tela de explorar comidas: /explorar/comidas;
-  Tela de explorar bebidas: /explorar/bebidas;
-  Tela de explorar comidas por ingrediente: /explorar/comidas/ingredientes;
-  Tela de explorar bebidas por ingrediente: /explorar/bebidas/ingredientes;
-  Tela de explorar comidas por local de origem: /explorar/comidas/area;
-  Tela de perfil: /perfil;
-  Tela de receitas feitas: /receitas-feitas;
-  Tela de receitas favoritas: /receitas-favoritas.
-*/
