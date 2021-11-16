@@ -12,7 +12,7 @@ export default function DrinksMainPage() {
   const TWELVE_ITEMS = 12;
 
   const fetchDrinks = async () => {
-    setData(await fetchAPI('drinks', 'name', ''));
+    if (!data) return setData(await fetchAPI('drinks', 'name', ''));
   };
 
   useEffect(() => {

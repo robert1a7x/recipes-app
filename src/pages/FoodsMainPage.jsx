@@ -13,7 +13,7 @@ export default function FoodMainPage() {
   const TWELVE_ITEMS = 12;
 
   const fetchMeals = async () => {
-    setData(await fetchAPI('meals', 'name', ''));
+    if (!data) return setData(await fetchAPI('meals', 'name', ''));
   };
 
   useEffect(() => {
