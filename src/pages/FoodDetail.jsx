@@ -12,7 +12,7 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 export default function FoodDetail() {
-  const { loading, setLoading, setRecipeInfo } = useAppContext();
+  const { loading, setLoading } = useAppContext();
   const { id } = useParams();
   const { pathname } = useLocation();
   const [recipeDetails, setRecipeDetails] = useState({});

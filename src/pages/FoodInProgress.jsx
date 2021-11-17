@@ -61,6 +61,10 @@ export default function FoodInProgress() {
     setFavorite(!favorite);
   }
 
+  const checkedIngredient = () => {
+
+  };
+
   if (loading) return <p>Loading...</p>;
   return (
     <div>
@@ -76,7 +80,7 @@ export default function FoodInProgress() {
           type="button"
           data-testid="share-btn"
           onClick={ () => {
-            copy(`http://localhost:3000${pathname}`);
+            copy(`https://localhost:${pathname}`);
             setClicked(true);
           } }
         >
@@ -97,8 +101,17 @@ export default function FoodInProgress() {
       <ul>
         { ingredients && ingredients.map((ingredient, index) => (
           <li key={ ingredient } data-testid={ `${index}-ingredient-step` }>
-            <input type="checkbox" />
-            { `${ingredients[index]}  ${measures[index]}` }
+            <label
+              htmlFor={ ingredient }
+            >
+              <input
+                className="checkbox"
+                type="checkbox"
+                id={ ingredient }
+                onClick={ checkedIngredient }
+              />
+              { `${ingredients[index]}  ${measures[index]}` }
+            </label>
           </li>
         ))}
       </ul>
@@ -107,3 +120,13 @@ export default function FoodInProgress() {
     </div>
   );
 }
+// function checkedIngredient(ingredientName) {
+//   const newIngredients = ingredients.map(({ name, measure, checked }) => {
+//     if (name === ingredientName) {
+//       return { name, measure, checked: !checked };
+//     }
+//     return { name, measure, checked };
+//   });
+//   setIngredients(newIngredients);
+//   setLocalStorage(newIngredients);
+// }

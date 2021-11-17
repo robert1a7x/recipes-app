@@ -76,7 +76,7 @@ export default function FoodInProgress() {
           type="button"
           data-testid="share-btn"
           onClick={ () => {
-            copy(`http://localhost:3000${pathname}`);
+            copy(`https://localhost:${pathname}/in-progress`);
             setClicked(true);
           } }
         >
