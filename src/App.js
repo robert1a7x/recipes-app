@@ -19,6 +19,7 @@ import CompleteRecipes from './pages/CompleteRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import ExploreFoodsByArea from './pages/ExploreFoodsByArea';
 import ExploreDrinksByIngredients from './pages/ExploreDrinksByIngredients';
+import NotFound from './pages/NotFound';
 
 export default function App() {
   return (
@@ -56,26 +57,8 @@ export default function App() {
         <Route exact path="/perfil" component={ Profile } />
         <Route exact path="/receitas-feitas" component={ CompleteRecipes } />
         <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
+        <Route component={ NotFound } />
       </Switch>
     </Provider>
   );
 }
-/*
-
-  Tela de login: /;
-  Tela principal de receitas de comidas: /comidas;
-  Tela principal de receitas de bebidas: /bebidas;
-  Tela de detalhes de uma receita de comida: /comidas/{id};
-  Tela de detalhes de uma receita de bebida: /bebidas/{id};
-  Tela de receita em processo de comida: /comidas/{id}/in-progress;
-  Tela de receita em processo de bebida: /bebidas/{id}/in-progress;
-  Tela de explorar: /explorar;
-  Tela de explorar comidas: /explorar/comidas;
-  Tela de explorar bebidas: /explorar/bebidas;
-  Tela de explorar comidas por ingrediente: /explorar/comidas/ingredientes;
-  Tela de explorar bebidas por ingrediente: /explorar/bebidas/ingredientes;
-  Tela de explorar comidas por local de origem: /explorar/comidas/area;
-  Tela de perfil: /perfil;
-  Tela de receitas feitas: /receitas-feitas;
-  Tela de receitas favoritas: /receitas-favoritas.
-*/

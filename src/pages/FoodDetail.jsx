@@ -117,13 +117,14 @@ export default function FoodDetail() {
         ))}
       </ul>
       <p data-testid="instructions">{ recipeDetails.strInstructions }</p>
-      <iframe
-        data-testid="video"
-        width="560"
-        height="315"
-        src={ `https://www.youtube.com/embed/${recipeDetails.strYoutube.split('=')[1]}` }
-        title="YouTube video player"
-      />
+      { recipeDetails.strYoutube
+       && <iframe
+         data-testid="video"
+         width="560"
+         height="315"
+         src={ `https://www.youtube.com/embed/${recipeDetails.strYoutube.split('=')[1]}` }
+         title="YouTube video player"
+       /> }
       <Recommendations items={ drinkRecomendations } />
       { isDone && (
         <Link to={ `/comidas/${recipeDetails.idMeal}/in-progress` }>
