@@ -17,7 +17,14 @@ export default function FoodMainPage() {
   };
 
   useEffect(() => {
-    fetchMeals();
+    if (data) return setAll(0);
+    setAll(1);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (all > 0) fetchMeals();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [all]);
 
   return (

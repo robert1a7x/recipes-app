@@ -12,17 +12,15 @@ const filter = {
   details: 'lookup.php?i=',
   recomendations: 'search.php?s=',
   random: 'random.php',
+  listIngredients: 'list.php?i=',
 };
 
 export default async function fetchAPI(API, type, value = '') {
   try {
     const responseRaw = await fetch(`https://www.${endpoint[API]}.com/api/json/v1/1/${filter[type]}${value}`);
     const responseJSON = await responseRaw.json();
-    console.log(responseJSON[API]);
     return responseJSON[API];
   } catch (error) {
     console.error(error);
   }
 }
-
-console.log(fetchAPI('drinks', 'details', Number('178319')));

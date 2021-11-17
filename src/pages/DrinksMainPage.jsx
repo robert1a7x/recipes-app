@@ -16,7 +16,14 @@ export default function DrinksMainPage() {
   };
 
   useEffect(() => {
-    fetchDrinks();
+    if (data) return setAll(0);
+    setAll(1);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (all > 0) fetchDrinks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [all]);
 
   return (
