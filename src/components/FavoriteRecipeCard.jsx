@@ -28,7 +28,7 @@ export default function FavoriteRecipeCard({ recipe, index }) {
     const filterRecipe = recipes.filter((r) => r.name !== name);
     localStorage.setItem('favoriteRecipes', JSON.stringify(filterRecipe));
     setFilterRecipe(filterRecipe);
-    document.location.reloagit statusd(true);
+    document.location.reload(true);
   };
 
   return (
