@@ -12,7 +12,7 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 export default function DrinkDetail() {
-  const { loading, setLoading } = useAppContext();
+  const { loading, setLoading, setRecipeInfo } = useAppContext();
   const { id } = useParams();
   const { pathname } = useLocation();
   const [recipeDetails, setRecipeDetails] = useState({});
@@ -51,6 +51,7 @@ export default function DrinkDetail() {
       const recommendedFoods = await foodsResponse
         .filter((_elem, index) => index < MAX_RECOMENDATIONS);
       setRecipeDetails(recipe[0]);
+      setRecipeInfo(recipe[0]);
       setFoodRecomendations(recommendedFoods);
       setLoading(false);
       setFavorite(isFavorite);
@@ -74,6 +75,17 @@ export default function DrinkDetail() {
     ];
     localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteMeal));
     setFavorite(!favorite);
+  }
+
+  function saveInProgressRecipe() {
+    const newInProgressDrink = {
+      ...inProgressRecipes,
+      cocktails: {
+        ...inProgressRecipes.cocktails,
+        [id]: [],
+      },
+    };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newInProgressDrink));
   }
 
   if (loading) return <p>Loading...</p>;
@@ -123,6 +135,7 @@ export default function DrinkDetail() {
             className="iniciar-receita"
             type="button"
             data-testid="start-recipe-btn"
+            onClick={ () => saveInProgressRecipe() }
           >
             { isInProgress ? 'Continuar Receita' : 'Iniciar Receita' }
           </button>

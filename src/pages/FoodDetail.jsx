@@ -12,7 +12,7 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 export default function FoodDetail() {
-  const { loading, setLoading } = useAppContext();
+  const { loading, setLoading, setRecipeInfo } = useAppContext();
   const { id } = useParams();
   const { pathname } = useLocation();
   const [recipeDetails, setRecipeDetails] = useState({});
@@ -76,6 +76,17 @@ export default function FoodDetail() {
     setFavorite(!favorite);
   }
 
+  function saveInProgressRecipe() {
+    const newInProgressMeal = {
+      ...inProgressRecipes,
+      meals: {
+        ...inProgressRecipes.meals,
+        [id]: [],
+      },
+    };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newInProgressMeal));
+  }
+
   if (loading) return <p>Loading...</p>;
   return (
     <div>
@@ -132,6 +143,7 @@ export default function FoodDetail() {
             className="iniciar-receita"
             type="button"
             data-testid="start-recipe-btn"
+            onClick={ () => saveInProgressRecipe() }
           >
             { isInProgress ? 'Continuar Receita' : 'Iniciar Receita' }
           </button>
