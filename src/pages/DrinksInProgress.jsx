@@ -134,7 +134,13 @@ export default function DrinksInProgress() {
         ))}
       </ul>
       <p data-testid="instructions">{ recipeInfo.strInstructions }</p>
-      <button type="button" data-testid="finish-recipe-btn">Finalizar Receita</button>
+      <button
+        type="button"
+        data-testid="finish-recipe-btn"
+        disabled={ (selectedItems.length !== ingredients.length) }
+      >
+        Finalizar Receita
+      </button>
     </div>
   );
 }
