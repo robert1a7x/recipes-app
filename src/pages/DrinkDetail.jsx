@@ -12,7 +12,7 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 export default function DrinkDetail() {
-  const { loading, setLoading, setRecipeInfo } = useAppContext();
+  const { loading, setLoading } = useAppContext();
   const { id } = useParams();
   const { pathname } = useLocation();
   const [recipeDetails, setRecipeDetails] = useState({});
@@ -51,7 +51,6 @@ export default function DrinkDetail() {
       const recommendedFoods = await foodsResponse
         .filter((_elem, index) => index < MAX_RECOMENDATIONS);
       setRecipeDetails(recipe[0]);
-      setRecipeInfo(recipe[0]);
       setFoodRecomendations(recommendedFoods);
       setLoading(false);
       setFavorite(isFavorite);

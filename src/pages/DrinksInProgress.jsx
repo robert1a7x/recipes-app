@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom';
 import { useParams, useLocation } from 'react-router';
 import copy from 'clipboard-copy';
 import { useAppContext } from '../context/Provider';
+import {
+  saveIngredient,
+  getIngredients,
+  getMeasures,
+} from '../helpers/saveInLocalStorage';
 
 import '../Detail.css';
 import shareIcon from '../images/shareIcon.svg';
@@ -10,15 +15,19 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import fetchAPI from '../helpers/fetchAPI';
 
-export default function FoodInProgress() {
+export default function DrinksInProgress() {
   const { id } = useParams();
   const { pathname } = useLocation();
-  const [recipeInfo, setRecipeInfo] = useState([]);
   const [clicked, setClicked] = useState(false);
   const [favorite, setFavorite] = useState();
   const { loading, setLoading } = useAppContext();
+  const [selectedItems, setSelectedItems] = useState([]);
+  const [recipeInfo, setRecipeInfo] = useState([]);
 
-  // const usedIngredients = JSON.parse(localStorage.getItem('inProgressRecipes')).drinks[id];
+  const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+
+  const newIngredient = { cocktails: { [id]: [] }, meals: {} };
+
   // console.log(usedIngredients);
   // console.log(recipeInfo);
 
@@ -26,23 +35,28 @@ export default function FoodInProgress() {
   // const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
   const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
 
-  const ingredients = Object.entries(recipeInfo)
-    .filter((p) => p[0].includes('strIngredient') && p[1])
-    .map((arr) => arr[1]);
-  const measures = Object.entries(recipeInfo)
-    .filter((p) => p[0].includes('strMeasure') && p[1])
-    .map((arr) => arr[1]);
+  const ingredients = getIngredients(recipeInfo);
+  const measures = getMeasures(recipeInfo);
 
   useEffect(() => {
     async function getRecipe() {
       setLoading(true);
       const recipe = await fetchAPI('drinks', 'details', Number(id));
+      const usedIngredients = await inProgressRecipes
+        ? inProgressRecipes.cocktails[id]
+        : localStorage.setItem('inProgressRecipes', JSON.stringify(newIngredient));
       setRecipeInfo(recipe[0]);
+      if (usedIngredients) setSelectedItems(usedIngredients);
       setLoading(false);
     }
     getRecipe();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    saveIngredient(inProgressRecipes, selectedItems, 'cocktails', id);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedItems]);
 
   function saveFavorite() {
     const newFavoriteMeal = [
@@ -52,13 +66,21 @@ export default function FoodInProgress() {
         type: 'comida',
         area: recipeInfo.strArea,
         category: recipeInfo.strCategory,
-        alcoholicOrNot: '',
+        alcoholicOrNot: recipeInfo.strAlcoholic,
         name: recipeInfo.strMeal,
         image: recipeInfo.strMealThumb,
       },
     ];
     localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteMeal));
     setFavorite(!favorite);
+  }
+
+  function handleChange(value) {
+    if (selectedItems.includes(value)) {
+      setSelectedItems(selectedItems.filter((item) => item !== value));
+    } else {
+      setSelectedItems([...selectedItems, value]);
+    }
   }
 
   if (loading) return <p>Loading...</p>;
@@ -76,7 +98,7 @@ export default function FoodInProgress() {
           type="button"
           data-testid="share-btn"
           onClick={ () => {
-            copy(`https://localhost:${pathname}/in-progress`);
+            copy(`https://localhost:${pathname}`);
             setClicked(true);
           } }
         >
@@ -97,7 +119,15 @@ export default function FoodInProgress() {
       <ul>
         { ingredients && ingredients.map((ingredient, index) => (
           <li key={ ingredient } data-testid={ `${index}-ingredient-step` }>
-            <input type="checkbox" />
+            <input
+              className="checkbox"
+              type="checkbox"
+              value={ ingredient }
+              onChange={ (e) => handleChange(e.target.value) }
+              checked={
+                selectedItems.includes(ingredient)
+              }
+            />
             { `${ingredients[index]}  ${measures[index]}` }
           </li>
         ))}
