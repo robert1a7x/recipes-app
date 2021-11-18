@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useParams, useLocation } from 'react-router';
+// import { Link } from 'react-router-dom';
+import { useParams } from 'react-router';
 import copy from 'clipboard-copy';
 import { useAppContext } from '../context/Provider';
 import {
@@ -17,7 +17,6 @@ import fetchAPI from '../helpers/fetchAPI';
 
 export default function DrinksInProgress() {
   const { id } = useParams();
-  const { pathname } = useLocation();
   const [clicked, setClicked] = useState(false);
   const [favorite, setFavorite] = useState();
   const { loading, setLoading } = useAppContext();
@@ -28,12 +27,13 @@ export default function DrinksInProgress() {
 
   const newIngredient = { cocktails: { [id]: [] }, meals: {} };
 
-  // console.log(usedIngredients);
-  // console.log(recipeInfo);
-
   // const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
   // const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
   const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+
+  const isFavorite = favoriteRecipes ? favoriteRecipes
+    .some((obj) => obj.id === id)
+    : localStorage.setItem('favoriteRecipes', JSON.stringify([]));
 
   const ingredients = getIngredients(recipeInfo);
   const measures = getMeasures(recipeInfo);
@@ -46,6 +46,7 @@ export default function DrinksInProgress() {
         ? inProgressRecipes.cocktails[id]
         : localStorage.setItem('inProgressRecipes', JSON.stringify(newIngredient));
       setRecipeInfo(recipe[0]);
+      setFavorite(isFavorite);
       if (usedIngredients) setSelectedItems(usedIngredients);
       setLoading(false);
     }
@@ -62,13 +63,13 @@ export default function DrinksInProgress() {
     const newFavoriteMeal = [
       ...favoriteRecipes,
       {
-        id: recipeInfo.idMeal,
-        type: 'comida',
-        area: recipeInfo.strArea,
+        id: recipeInfo.idDrink,
+        type: 'bebida',
+        area: '',
         category: recipeInfo.strCategory,
         alcoholicOrNot: recipeInfo.strAlcoholic,
-        name: recipeInfo.strMeal,
-        image: recipeInfo.strMealThumb,
+        name: recipeInfo.strDrink,
+        image: recipeInfo.strDrinkThumb,
       },
     ];
     localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteMeal));
@@ -98,7 +99,7 @@ export default function DrinksInProgress() {
           type="button"
           data-testid="share-btn"
           onClick={ () => {
-            copy(`https://localhost:${pathname}`);
+            copy(`http://localhost:3000/bebidas/${id}`);
             setClicked(true);
           } }
         >

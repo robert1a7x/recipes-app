@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useParams, useLocation } from 'react-router';
+// import { Link } from 'react-router-dom';
+import { useParams } from 'react-router';
 import copy from 'clipboard-copy';
 import { useAppContext } from '../context/Provider';
 import {
@@ -17,7 +17,6 @@ import fetchAPI from '../helpers/fetchAPI';
 
 export default function FoodInProgress() {
   const { id } = useParams();
-  const { pathname } = useLocation();
   const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
 
   const newIngredient = { cocktails: {}, meals: { [id]: [] } };
@@ -31,6 +30,10 @@ export default function FoodInProgress() {
   // const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
   const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
 
+  const isFavorite = favoriteRecipes ? favoriteRecipes
+    .some((obj) => obj.id === id)
+    : localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+
   const ingredients = getIngredients(recipeInfo);
   const measures = getMeasures(recipeInfo);
 
@@ -42,6 +45,7 @@ export default function FoodInProgress() {
         ? inProgressRecipes.meals[id]
         : localStorage.setItem('inProgressRecipes', JSON.stringify(newIngredient));
       setRecipeInfo(recipe[0]);
+      setFavorite(isFavorite);
       if (usedIngredients) setSelectedItems(usedIngredients);
       setLoading(false);
     }
@@ -94,7 +98,7 @@ export default function FoodInProgress() {
                 type="button"
                 data-testid="share-btn"
                 onClick={ () => {
-                  copy(`https://localhost:${pathname}`);
+                  copy(`http://localhost:3000/comidas/${id}`);
                   setClicked(true);
                 } }
               >
