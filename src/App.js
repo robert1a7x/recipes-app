@@ -1,7 +1,5 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-// import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Provider from './context/Provider';
 import Login from './pages/Login';
 import FoodsMainPage from './pages/FoodsMainPage';
@@ -20,6 +18,9 @@ import FavoriteRecipes from './pages/FavoriteRecipes';
 import ExploreFoodsByArea from './pages/ExploreFoodsByArea';
 import ExploreDrinksByIngredients from './pages/ExploreDrinksByIngredients';
 import NotFound from './pages/NotFound';
+
+import './css/App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function App() {
   return (

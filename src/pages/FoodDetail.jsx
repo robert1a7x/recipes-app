@@ -6,7 +6,7 @@ import fetchAPI from '../helpers/fetchAPI';
 import { useAppContext } from '../context/Provider';
 import Recommendations from '../components/Recommendations';
 
-import '../Detail.css';
+import '../css/Detail.css';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
