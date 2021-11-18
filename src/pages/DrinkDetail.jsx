@@ -76,6 +76,17 @@ export default function DrinkDetail() {
     setFavorite(!favorite);
   }
 
+  function saveInProgressRecipe() {
+    const newInProgressDrink = {
+      ...inProgressRecipes,
+      cocktails: {
+        ...inProgressRecipes.cocktails,
+        [id]: [],
+      },
+    };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newInProgressDrink));
+  }
+
   if (loading) return <p>Loading...</p>;
   return (
     <div>
@@ -123,6 +134,7 @@ export default function DrinkDetail() {
             className="iniciar-receita"
             type="button"
             data-testid="start-recipe-btn"
+            onClick={ () => saveInProgressRecipe() }
           >
             { isInProgress ? 'Continuar Receita' : 'Iniciar Receita' }
           </button>

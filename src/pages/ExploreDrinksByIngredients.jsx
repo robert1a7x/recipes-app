@@ -24,7 +24,7 @@ export default function ExploreDrinksByIngredients() {
   return (
     <div>
       <Header title="Explorar Ingredientes" />
-      { ingredients.map((ingredient, index) => (
+      { ingredients && ingredients.map((ingredient, index) => (
         (index < MAX_ITEMS)
         && <IngredientCard ingredient={ ingredient } index={ index } key={ ingredient } />
       ))}

@@ -76,6 +76,17 @@ export default function FoodDetail() {
     setFavorite(!favorite);
   }
 
+  function saveInProgressRecipe() {
+    const newInProgressMeal = {
+      ...inProgressRecipes,
+      meals: {
+        ...inProgressRecipes.meals,
+        [id]: [],
+      },
+    };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newInProgressMeal));
+  }
+
   if (loading) return <p>Loading...</p>;
   return (
     <div>
@@ -132,6 +143,7 @@ export default function FoodDetail() {
             className="iniciar-receita"
             type="button"
             data-testid="start-recipe-btn"
+            onClick={ () => saveInProgressRecipe() }
           >
             { isInProgress ? 'Continuar Receita' : 'Iniciar Receita' }
           </button>
