@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import { Link } from 'react-router-dom';
-import { useParams } from 'react-router';
+import { useParams, useHistory } from 'react-router';
 import copy from 'clipboard-copy';
 import { useAppContext } from '../context/Provider';
 import {
@@ -17,6 +16,7 @@ import fetchAPI from '../helpers/fetchAPI';
 
 export default function FoodInProgress() {
   const { id } = useParams();
+  const history = useHistory();
   const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
 
   const newIngredient = { cocktails: {}, meals: { [id]: [] } };
@@ -136,6 +136,7 @@ export default function FoodInProgress() {
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ (selectedItems.length !== ingredients.length) }
+        onClick={ () => history.push('/receitas-feitas') }
       >
         Finalizar Receita
       </button>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import { Link } from 'react-router-dom';
-import { useParams } from 'react-router';
+import { useParams, useHistory } from 'react-router';
 import copy from 'clipboard-copy';
 import { useAppContext } from '../context/Provider';
 import {
@@ -17,6 +16,7 @@ import fetchAPI from '../helpers/fetchAPI';
 
 export default function DrinksInProgress() {
   const { id } = useParams();
+  const history = useHistory();
   const [clicked, setClicked] = useState(false);
   const [favorite, setFavorite] = useState();
   const { loading, setLoading } = useAppContext();
@@ -138,6 +138,7 @@ export default function DrinksInProgress() {
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ (selectedItems.length !== ingredients.length) }
+        onClick={ () => history.push('/receitas-feitas') }
       >
         Finalizar Receita
       </button>
