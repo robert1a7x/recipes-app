@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import isEmail from 'email-format-check';
 import { useHistory } from 'react-router';
+import '../style/Login.css';
 
 export default function Login() {
   const [password, setPassword] = useState('');
@@ -19,31 +20,37 @@ export default function Login() {
   }
 
   return (
-    <form>
-      <h1>Login</h1>
-      <input
-        type="email"
-        placeholder="Digite seu email"
-        data-testid="email-input"
-        onChange={ (e) => setEmail(e.target.value) }
-      />
-      <input
-        type="password"
-        data-testid="password-input"
-        placeholder="Digite sua senha"
-        onChange={ (e) => setPassword(e.target.value) }
-      />
-      <button
-        type="button"
-        data-testid="login-submit-btn"
-        disabled={ verifyLogin() }
-        onClick={ async () => {
-          await saveIntoLocalStorage();
-          history.push('/comidas');
-        } }
-      >
-        Entrar
-      </button>
+    <form className="container-login-form">
+      <div className="card-login">
+        <h1>Login</h1>
+        <input
+          className="input-button"
+          type="email"
+          placeholder="Digite seu email"
+          data-testid="email-input"
+          onChange={ (e) => setEmail(e.target.value) }
+        />
+        <input
+          className="input-button"
+          type="password"
+          data-testid="password-input"
+          placeholder="Digite sua senha"
+          onChange={ (e) => setPassword(e.target.value) }
+        />
+        <button
+          className="input-button"
+          type="button"
+          data-testid="login-submit-btn"
+          disabled={ verifyLogin() }
+          onClick={ async () => {
+            await saveIntoLocalStorage();
+            history.push('/comidas');
+          } }
+        >
+          Entrar
+        </button>
+      </div>
+
     </form>
   );
 }

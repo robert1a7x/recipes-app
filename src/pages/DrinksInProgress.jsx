@@ -8,7 +8,7 @@ import {
   getMeasures,
 } from '../helpers/saveInLocalStorage';
 
-import '../Detail.css';
+import '../style/Detail.css';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
