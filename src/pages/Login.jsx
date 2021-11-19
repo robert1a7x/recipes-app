@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import isEmail from 'email-format-check';
 import { useHistory } from 'react-router';
+
 import '../style/Login.css';
 
 export default function Login() {
@@ -50,7 +51,6 @@ export default function Login() {
           Entrar
         </button>
       </div>
-
     </form>
   );
 }
