@@ -5,11 +5,11 @@ import copy from 'clipboard-copy';
 import fetchAPI from '../helpers/fetchAPI';
 import { useAppContext } from '../context/Provider';
 import Recommendations from '../components/Recommendations';
-
-import '../css/Detail.css';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+
+import '../style/Detail.css';
 
 export default function FoodDetail() {
   const { loading, setLoading } = useAppContext();
@@ -76,6 +76,17 @@ export default function FoodDetail() {
     setFavorite(!favorite);
   }
 
+  function saveInProgressRecipe() {
+    const newInProgressMeal = {
+      ...inProgressRecipes,
+      meals: {
+        ...inProgressRecipes.meals,
+        [id]: [],
+      },
+    };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newInProgressMeal));
+  }
+
   if (loading) return <p>Loading...</p>;
   return (
     <div>
@@ -132,6 +143,7 @@ export default function FoodDetail() {
             className="iniciar-receita"
             type="button"
             data-testid="start-recipe-btn"
+            onClick={ () => saveInProgressRecipe() }
           >
             { isInProgress ? 'Continuar Receita' : 'Iniciar Receita' }
           </button>

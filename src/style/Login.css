@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;400&display=swap');
+
+.container-login-form{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.card-login{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 250px;
+  height: 250px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.input-button{
+  font-family: 'Nunito', sans-serif;
+  border-radius: 4px;
+  border: 1px solid #656665;
+}
+
+.card-login h1 {
+  font-weight: 200;
+  
+}
+
+.card-login input{
+  margin-bottom: 15px;
+  padding: 10px;
+  
+}
+
+.card-login button{
+  padding: 10px 80px;
+}
+

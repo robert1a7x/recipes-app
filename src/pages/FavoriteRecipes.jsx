@@ -14,6 +14,7 @@ export default function FavoriteRecipes() {
       localStorage.setItem('favoriteRecipes', JSON.stringify([]));
     }
     setFavoriteRecipe(recipes);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const filterBy = (event) => {

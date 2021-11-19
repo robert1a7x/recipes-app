@@ -19,8 +19,8 @@ import ExploreFoodsByArea from './pages/ExploreFoodsByArea';
 import ExploreDrinksByIngredients from './pages/ExploreDrinksByIngredients';
 import NotFound from './pages/NotFound';
 
-import './css/App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './style/App.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function App() {
   return (

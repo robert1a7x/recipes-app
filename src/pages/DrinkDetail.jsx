@@ -5,11 +5,11 @@ import copy from 'clipboard-copy';
 import fetchAPI from '../helpers/fetchAPI';
 import { useAppContext } from '../context/Provider';
 import Recommendations from '../components/Recommendations';
-
-import '../css/Detail.css';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+
+import '../style/Detail.css';
 
 export default function DrinkDetail() {
   const { loading, setLoading } = useAppContext();
@@ -76,6 +76,17 @@ export default function DrinkDetail() {
     setFavorite(!favorite);
   }
 
+  function saveInProgressRecipe() {
+    const newInProgressDrink = {
+      ...inProgressRecipes,
+      cocktails: {
+        ...inProgressRecipes.cocktails,
+        [id]: [],
+      },
+    };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newInProgressDrink));
+  }
+
   if (loading) return <p>Loading...</p>;
   return (
     <div>
@@ -123,6 +134,7 @@ export default function DrinkDetail() {
             className="iniciar-receita"
             type="button"
             data-testid="start-recipe-btn"
+            onClick={ () => saveInProgressRecipe() }
           >
             { isInProgress ? 'Continuar Receita' : 'Iniciar Receita' }
           </button>
