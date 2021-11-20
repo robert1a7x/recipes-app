@@ -1,0 +1,41 @@
+.btn-categories {
+  margin-top: 80px;
+  text-align: center;
+}
+
+.btn-categories button {
+  padding: 10px 80px;
+  font-weight: 700;
+  border: none;
+  background-color: rgb(224, 224, 224);
+  margin-bottom: 20px;
+}
+
+.btn-categories button:hover{
+  cursor:pointer;
+  background-color: none;
+  transition: 0.5s;
+}
+
+.btn-categories button:disabled {
+  cursor: default;
+}
+
+.btn-categories button:hover:enabled {
+  background-color:  #e3655b;
+  color: white;
+}
+
+.card-food{
+  margin: 0 auto;
+  margin-top:10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 4px;
+  text-align: center;
+  width:30%;
+  padding:5px;
+}
+
+.card-food:hover{
+  background-color: #e6e6e6;
+}

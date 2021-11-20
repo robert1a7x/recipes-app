@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import isEmail from 'email-format-check';
 import { useHistory } from 'react-router';
+import { FaUser } from 'react-icons/fa';
+import { RiLockPasswordFill } from 'react-icons/ri';
 
 import '../style/Login.css';
 
@@ -24,20 +26,26 @@ export default function Login() {
     <form className="container-login-form">
       <div className="card-login">
         <h1>Login</h1>
-        <input
-          className="input-button"
-          type="email"
-          placeholder="Digite seu email"
-          data-testid="email-input"
-          onChange={ (e) => setEmail(e.target.value) }
-        />
-        <input
-          className="input-button"
-          type="password"
-          data-testid="password-input"
-          placeholder="Digite sua senha"
-          onChange={ (e) => setPassword(e.target.value) }
-        />
+        <div className="input-group">
+          <input
+            className="input-button"
+            type="email"
+            placeholder="Digite seu email"
+            data-testid="email-input"
+            onChange={ (e) => setEmail(e.target.value) }
+          />
+          <FaUser />
+        </div>
+        <div className="input-group">
+          <input
+            className="input-button"
+            type="password"
+            data-testid="password-input"
+            placeholder="Digite sua senha"
+            onChange={ (e) => setPassword(e.target.value) }
+          />
+          <RiLockPasswordFill />
+        </div>
         <button
           className="input-button"
           type="button"

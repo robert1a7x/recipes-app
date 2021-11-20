@@ -6,8 +6,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #ffc2a996;
 }
 
+.input-group {
+  position: relative;
+}
 
 .card-login{
   display: flex;
@@ -21,6 +25,14 @@
   padding: 20px;
 }
 
+svg {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  font-size: 20px;
+  
+}
+
 .input-button{
   font-family: 'Nunito', sans-serif;
   border-radius: 4px;
@@ -29,16 +41,37 @@
 
 .card-login h1 {
   font-weight: 200;
-  
 }
 
 .card-login input{
   margin-bottom: 15px;
   padding: 10px;
-  
+  /* position: relative; */
+  text-indent: 25px;
+}
+
+.card-login input:focus {
+  outline: 2px solid rgb(194, 194, 194);
 }
 
 .card-login button{
   padding: 10px 80px;
+  font-weight: 700;
+  border: none;
+  background-color: rgb(224, 224, 224);
 }
 
+.card-login button:hover{
+  cursor:pointer;
+  background-color: none;
+  transition: 0.5s;
+}
+
+.card-login button:disabled {
+  cursor: default;
+}
+
+.card-login button:hover:enabled {
+  background-color:  #306ea5;
+  color: white;
+}

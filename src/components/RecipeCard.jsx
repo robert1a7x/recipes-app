@@ -1,16 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import '../style/MainPages.css';
 
 export default function RecipeCard({ recipe, index }) {
   return (
-    <div data-testid={ `${index}-recipe-card` }>
+    <div data-testid={ `${index}-recipe-card` } className="card-food">
       <Link
         to={ recipe.idMeal
           ? `/comidas/${recipe.idMeal}`
           : `/bebidas/${recipe.idDrink}` }
       >
         <img
+          width={ 300 }
           data-testid={ `${index}-card-img` }
           src={ recipe.strMealThumb || recipe.strDrinkThumb }
           alt="Recipe Thumb"

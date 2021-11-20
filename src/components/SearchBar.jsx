@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import { useAppContext } from '../context/Provider';
 import fetchAPI from '../helpers/fetchAPI';
+import '../style/SearchBar.css';
 
 export default function SearchBar() {
   const history = useHistory();
@@ -79,6 +80,7 @@ export default function SearchBar() {
       </label>
 
       <button
+        className="btn-searchbar"
         type="button"
         data-testid="exec-search-btn"
         onClick={ () => filterSearch() }
