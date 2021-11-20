@@ -1,52 +1,50 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;400&display=swap') ;
 
-.container-login-form{
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
+.container-login-form {
   align-items: center;
   background-color: #ffc2a996;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
 }
 
 .input-group {
   position: relative;
 }
 
-.card-login{
-  display: flex;
+.card-login {
   align-items: center;
-  flex-direction: column;
-  width: 250px;
-  height: 250px;
   background-color: white;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+  display: flex;
+  flex-direction: column;
+  height: 250px;
   padding: 20px;
+  width: 250px;
 }
 
 svg {
-  position: absolute;
-  left: 10px;
-  top: 10px;
   font-size: 20px;
-  
+  left: 10px;
+  position: absolute;
+  top: 10px;
 }
 
-.input-button{
-  font-family: 'Nunito', sans-serif;
-  border-radius: 4px;
+.input-button {
   border: 1px solid #656665;
+  border-radius: 4px;
+  font-family: Nunito , sans-serif;
 }
 
 .card-login h1 {
   font-weight: 200;
 }
 
-.card-login input{
+.card-login input {
   margin-bottom: 15px;
   padding: 10px;
-  /* position: relative; */
   text-indent: 25px;
 }
 
@@ -54,16 +52,16 @@ svg {
   outline: 2px solid rgb(194, 194, 194);
 }
 
-.card-login button{
-  padding: 10px 80px;
-  font-weight: 700;
-  border: none;
+.card-login button {
   background-color: rgb(224, 224, 224);
+  border: none;
+  font-weight: 700;
+  padding: 10px 80px;
 }
 
-.card-login button:hover{
-  cursor:pointer;
+.card-login button:hover {
   background-color: none;
+  cursor: pointer;
   transition: 0.5s;
 }
 
@@ -72,6 +70,6 @@ svg {
 }
 
 .card-login button:hover:enabled {
-  background-color:  #306ea5;
+  background-color: #306ea5;
   color: white;
 }

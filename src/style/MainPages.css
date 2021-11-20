@@ -4,16 +4,16 @@
 }
 
 .btn-categories button {
-  padding: 10px 80px;
-  font-weight: 700;
-  border: none;
   background-color: rgb(224, 224, 224);
+  border: none;
+  font-weight: 700;
   margin-bottom: 20px;
+  padding: 10px 80px;
 }
 
-.btn-categories button:hover{
-  cursor:pointer;
+.btn-categories button:hover {
   background-color: none;
+  cursor: pointer;
   transition: 0.5s;
 }
 
@@ -22,20 +22,20 @@
 }
 
 .btn-categories button:hover:enabled {
-  background-color:  #e3655b;
+  background-color: #e3655b;
   color: white;
 }
 
-.card-food{
-  margin: 0 auto;
-  margin-top:10px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+.card-food {
   border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+  margin: 0 auto;
+  margin-top: 10px;
+  padding: 5px;
   text-align: center;
-  width:30%;
-  padding:5px;
+  width: 30%;
 }
 
-.card-food:hover{
+.card-food:hover {
   background-color: #e6e6e6;
 }
