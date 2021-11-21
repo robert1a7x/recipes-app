@@ -20,7 +20,12 @@ export default function ExploreDrinksByIngredients() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) {
+    return (
+      <section className="parente-loading">
+        <div className="loading" />
+      </section>);
+  }
   return (
     <div>
       <Header title="Explorar Ingredientes" />

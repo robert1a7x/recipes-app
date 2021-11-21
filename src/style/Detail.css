@@ -1,25 +1,28 @@
+.parent-details {
+  overflow-x: hidden;
+}
+
 .iniciar-receita {
   bottom: 0;
   position: fixed;
 }
 
 .parent-iniciar-receita {
-  background-color: #ec9673;
   height: 20px;
   margin: 0 auto;
   width: 100vw;
+  z-index: 2;
 }
 
 .parent-iniciar-receita button {
-  background-color: #6d0e0a;
+  background-color: #6d0d0a;
   border: none;
   border-radius: 4px;
   color: white;
   font-family: Nunito , sans-serif;
   font-weight: 700;
-  margin-bottom: 10px;
-  margin-left: 10px;
-  padding: 10px 50px;
+  margin: 1rem;
+  padding: 20px 50px;
 }
 
 .parent-iniciar-receita button:hover {
@@ -59,7 +62,7 @@
 }
 
 .carousel-item img {
-  width: 45vw;
+  width: 15vw;
 }
 
 .startButton {
@@ -68,24 +71,52 @@
   width: 100%;
 }
 
-.parent-details {
-  overflow-x: hidden;
-}
 
-.container-details {
-  align-items: center;
-  background-color: #e9551b96;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  justify-content: center;
+.title-detail {
+  background-color: #630a07;
+  color: #ffc3ac;
+  margin: 0;
+  padding: 10px;
+  position: fixed;
+  text-align: center;
   width: 100vw;
 }
 
-.container-details h1 {
-  color: #6d0e0a;
-  font-size: 30px;
-  padding-top: 50px;
+.container-details {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row wrap;
+  justify-content: center;
+  margin: auto;
+  margin-bottom: 2rem;
+  margin-top: 5rem;
+  width: 90vw;
+}
+
+
+.item-details {
+  flex: 0 1 35%;
+  padding: 1.2rem;
+  text-align: justify;
+}
+
+.item-details span {
+  font-size: medium;
+  font-weight: 700;
+}
+
+.item-details li, p {
+  font-size: 1.1rem;
+  line-height: 1.7rem;
+}
+
+.icons {
+  margin-right: 5px;
+  width: 100px;
+}
+
+.video-detail {
+  text-align: center;
 }
 
 .container-details .recipe-photo {
@@ -101,14 +132,21 @@
   display: flex;
 }
 
+.button-details {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
 .recommendation {
-  background-color: #e9551b96;
-  padding: 0 20% 40px;
+  margin: 2rem;
+  padding: 0 50%;
 }
 
 .recommendation img {
   border-radius: 4px;
-  box-shadow: rgba(255, 255, 255, 0.24) 0 3px 8px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px , rgba(0, 0, 0, 0.3)
+    0 7px 13px -3px , rgba(0, 0, 0, 0.2) 0 -3px 0 inset;
   padding: 10px;
 }
 

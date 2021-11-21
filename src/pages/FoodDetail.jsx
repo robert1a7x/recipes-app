@@ -87,67 +87,97 @@ export default function FoodDetail() {
     localStorage.setItem('inProgressRecipes', JSON.stringify(newInProgressMeal));
   }
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) {
+    return (
+      <section className="parente-loading">
+        <div className="loading" />
+      </section>);
+  }
   return (
-    <div className="container-details">
-      <h1 data-testid="recipe-title">{ recipeDetails.strMeal }</h1>
-      <img
-        data-testid="recipe-photo"
-        src={ recipeDetails.strMealThumb }
-        alt={ `${recipeDetails.strMeal} Recipe` }
-        width={ 200 }
-      />
-      <div>
-        <button
-          type="button"
-          data-testid="share-btn"
-          onClick={ () => {
-            copy(`http://localhost:3000${pathname}`);
-            setClicked(true);
-          } }
-        >
-          { clicked ? 'Link copiado!' : <img src={ shareIcon } alt="Share icon" /> }
-        </button>
-        <button
-          type="button"
-          onClick={ () => saveFavorite() }
-        >
+    <section className="parent-details">
+      <h1
+        data-testid="recipe-title"
+        className="title-detail"
+      >
+        { recipeDetails.strMeal }
+      </h1>
+      <section className="container-details">
+        <div className="item-details">
           <img
-            data-testid="favorite-btn"
-            src={ favorite ? blackHeartIcon : whiteHeartIcon }
-            alt="favorite icon"
+            className="recipe-photo"
+            data-testid="recipe-photo"
+            src={ recipeDetails.strMealThumb }
+            alt={ `${recipeDetails.strMeal} Recipe` }
+            width={ 200 }
           />
-        </button>
-      </div>
-      <h2 data-testid="recipe-category">{ recipeDetails.strCategory }</h2>
-      <ul>
-        { ingredients && ingredients.map((ingredient, index) => (
-          <li key={ ingredient } data-testid={ `${index}-ingredient-name-and-measure` }>
-            { ingredients[index] + measures[index] }
-          </li>
-        ))}
-      </ul>
-      <p data-testid="instructions">{ recipeDetails.strInstructions }</p>
-      { recipeDetails.strYoutube
-       && <iframe
-         data-testid="video"
-         width="560"
-         height="315"
-         src={ `https://www.youtube.com/embed/${recipeDetails.strYoutube.split('=')[1]}` }
-         title="YouTube video player"
-       /> }
-      <Recommendations items={ drinkRecomendations } />
-      { isDone && (
-        <Link to={ `/comidas/${recipeDetails.idMeal}/in-progress` }>
+          <span data-testid="recipe-category">{ recipeDetails.strCategory }</span>
+          <br />
           <button
-            className="iniciar-receita"
+            className="icons"
             type="button"
-            data-testid="start-recipe-btn"
-            onClick={ () => saveInProgressRecipe() }
+            data-testid="share-btn"
+            onClick={ () => {
+              copy(`http://localhost:3000${pathname}`);
+              setClicked(true);
+            } }
           >
-            { isInProgress ? 'Continuar Receita' : 'Iniciar Receita' }
+            { clicked ? 'Link copiado!' : <img src={ shareIcon } alt="Share icon" /> }
           </button>
-        </Link>)}
-    </div>
+          <button
+            className="icons"
+            type="button"
+            onClick={ () => saveFavorite() }
+          >
+            <img
+              data-testid="favorite-btn"
+              src={ favorite ? blackHeartIcon : whiteHeartIcon }
+              alt="favorite icon"
+            />
+          </button>
+        </div>
+        <ul className="item-details">
+          { ingredients && ingredients.map((ingredient, index) => (
+            <li
+              key={ ingredient }
+              data-testid={ `${index}-ingredient-name-and-measure` }
+            >
+              { ingredients[index] + measures[index] }
+            </li>
+          ))}
+        </ul>
+        <p
+          data-testid="instructions"
+          className="item-details"
+        >
+          { recipeDetails.strInstructions }
+
+        </p>
+      </section>
+      <section className="video-detail">
+        { recipeDetails.strYoutube
+          && <iframe
+            data-testid="video"
+            width="560"
+            height="315"
+            src={ `https://www.youtube.com/embed/${recipeDetails.strYoutube.split('=')[1]}` }
+            title="YouTube video player"
+          /> }
+
+      </section>
+      <Recommendations items={ drinkRecomendations } />
+      <div className="parent-iniciar-receita">
+        { isDone && (
+          <Link to={ `/comidas/${recipeDetails.idMeal}/in-progress` }>
+            <button
+              className="iniciar-receita"
+              type="button"
+              data-testid="start-recipe-btn"
+              onClick={ () => saveInProgressRecipe() }
+            >
+              { isInProgress ? 'Continuar Receita' : 'Iniciar Receita' }
+            </button>
+          </Link>)}
+      </div>
+    </section>
   );
 }

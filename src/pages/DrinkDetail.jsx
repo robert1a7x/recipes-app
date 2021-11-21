@@ -87,49 +87,75 @@ export default function DrinkDetail() {
     localStorage.setItem('inProgressRecipes', JSON.stringify(newInProgressDrink));
   }
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) {
+    return (
+      <section className="parente-loading">
+        <div className="loading" />
+      </section>);
+  }
   return (
-    <div className="parent-details">
+    <section className="parent-details">
+      <h1
+        data-testid="recipe-title"
+        className="title-detail"
+      >
+        { recipeDetails.strDrink }
+
+      </h1>
       <section className="container-details">
-        <h1 data-testid="recipe-title">{ recipeDetails.strDrink }</h1>
-        <img
-          className="recipe-photo"
-          data-testid="recipe-photo"
-          src={ recipeDetails.strDrinkThumb }
-          alt="Receita"
-        />
-        <button
-          type="button"
-          data-testid="share-btn"
-          onClick={ () => {
-            copy(`http://localhost:3000${pathname}`);
-            setClicked(true);
-          } }
-        >
-          { clicked ? 'Link copiado!' : <img src={ shareIcon } alt="Share icon" /> }
-        </button>
-        <button
-          type="button"
-          onClick={ () => saveFavorite() }
-        >
+        <div className="item-details">
           <img
-            data-testid="favorite-btn"
-            src={ favorite ? blackHeartIcon : whiteHeartIcon }
-            alt="favorite icon"
+            className="recipe-photo"
+            data-testid="recipe-photo"
+            src={ recipeDetails.strDrinkThumb }
+            alt="Receita"
           />
-        </button>
-        <span data-testid="recipe-category">
-          { recipeDetails.strAlcoholic ? 'Alcoholic' : recipeDetails.strCategory }
-        </span>
-        <ul>
+
+          <span data-testid="recipe-category">
+            { recipeDetails.strAlcoholic ? 'Alcoholic' : recipeDetails.strCategory }
+          </span>
+          <br />
+          <button
+            className="icons"
+            type="button"
+            data-testid="share-btn"
+            onClick={ () => {
+              copy(`http://localhost:3000${pathname}`);
+              setClicked(true);
+            } }
+          >
+            { clicked ? 'Link copiado!' : <img src={ shareIcon } alt="Share icon" /> }
+          </button>
+          <button
+            className="icons"
+            type="button"
+            onClick={ () => saveFavorite() }
+          >
+            <img
+              data-testid="favorite-btn"
+              src={ favorite ? blackHeartIcon : whiteHeartIcon }
+              alt="favorite icon"
+            />
+          </button>
+        </div>
+
+        <ul className="item-details">
           { ingredients && ingredients.map((ingredient, index) => (
             <li key={ ingredient } data-testid={ `${index}-ingredient-name-and-measure` }>
               { ingredients[index] + measures[index] }
             </li>
           ))}
         </ul>
-        <p data-testid="instructions">{recipeDetails.strInstructions }</p>
+
+        <p
+          data-testid="instructions"
+          className="item-details"
+        >
+          {recipeDetails.strInstructions }
+
+        </p>
       </section>
+
       <Recommendations items={ foodRecomendations } />
       <div className="parent-iniciar-receita">
         { isDone && (
@@ -144,6 +170,6 @@ export default function DrinkDetail() {
             </button>
           </Link>)}
       </div>
-    </div>
+    </section>
   );
 }

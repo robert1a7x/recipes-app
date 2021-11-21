@@ -81,7 +81,12 @@ export default function FoodInProgress() {
       : setSelectedItems([...selectedItems, value]);
   }
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) {
+    return (
+      <section className="parente-loading">
+        <div className="loading" />
+      </section>);
+  }
 
   return (
     <div>

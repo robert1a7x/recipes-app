@@ -34,7 +34,12 @@ export default function ExploreFoodsByArea() {
     getData();
   }, [selectedCategory]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) {
+    return (
+      <section className="parente-loading">
+        <div className="loading" />
+      </section>);
+  }
 
   return (
     <div>
