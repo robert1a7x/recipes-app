@@ -5,6 +5,7 @@ import RecipeCard from '../components/RecipeCard';
 import Header from '../components/Header';
 import { useAppContext } from '../context/Provider';
 import ButtonCategory from '../components/ButtonCategory';
+import '../style/MainPages.css';
 
 export default function DrinksMainPage() {
   const [all, setAll] = useState(0);
@@ -29,8 +30,10 @@ export default function DrinksMainPage() {
   return (
     <div>
       <Header title="Tela de Bebidas" searchButton />
-      <ButtonCategory setAll={ setAll } all={ all } fetchRecipes={ fetchDrinks } />
-      <div>
+      <div className="btn-categories">
+        <ButtonCategory setAll={ setAll } all={ all } fetchRecipes={ fetchDrinks } />
+      </div>
+      <div className="food-cards-section">
         { data && data.map((recipe, index) => (
           (index < TWELVE_ITEMS)
           && <RecipeCard key={ index } recipe={ recipe } index={ index } />

@@ -28,6 +28,7 @@ export default function Recommendations({ items }) {
     <Carousel responsive={ responsive }>
       { items && items.map((item, index) => (
         <div
+          className="recommendation"
           key={ index }
           data-testid={ `${index}-recomendation-card` }
         >

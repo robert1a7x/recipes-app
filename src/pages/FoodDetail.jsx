@@ -89,7 +89,7 @@ export default function FoodDetail() {
 
   if (loading) return <p>Loading...</p>;
   return (
-    <div>
+    <div className="container-details">
       <h1 data-testid="recipe-title">{ recipeDetails.strMeal }</h1>
       <img
         data-testid="recipe-photo"

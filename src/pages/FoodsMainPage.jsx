@@ -34,7 +34,7 @@ export default function FoodMainPage() {
       <div className="btn-categories">
         <ButtonCategory setAll={ setAll } all={ all } fetchRecipes={ fetchMeals } />
       </div>
-      <div>
+      <div className="food-cards-section">
         { data && data.map((recipe, index) => (
           (index < TWELVE_ITEMS)
           && <RecipeCard key={ index } recipe={ recipe } index={ index } />

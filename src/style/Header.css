@@ -36,6 +36,7 @@
   padding-left: 50px;
   position: fixed;
   width: 100vw;
+  z-index: 2;
 }
 
 @keyframes pulse {

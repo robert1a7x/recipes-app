@@ -6,9 +6,11 @@
 .btn-categories button {
   background-color: rgb(224, 224, 224);
   border: none;
+  border-radius: 4px;
   font-weight: 700;
   margin-bottom: 20px;
-  padding: 10px 80px;
+  margin-left: 10px;
+  padding: 10px 50px;
 }
 
 .btn-categories button:hover {
@@ -29,13 +31,44 @@
 .card-food {
   border-radius: 4px;
   box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+  display: flex;
+  flex-direction: column;
   margin: 0 auto;
+  margin-bottom: 70px;
   margin-top: 10px;
   padding: 5px;
+  position: relative;
   text-align: center;
   width: 30%;
+  z-index: 0;
+}
+
+.card-food img {
+  border-radius: 4px;
+  height: 100%;
+  width: 100%;
+}
+
+.card-food a {
+  text-decoration: none;
+}
+
+.card-food h3 {
+  color: white;
+  font-size: 2.5rem;
+  left: 40%;
+  position: absolute;
+  top: 45%;
+  z-index: 1;
+
 }
 
 .card-food:hover {
   background-color: #e6e6e6;
+}
+
+.food-cards-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }

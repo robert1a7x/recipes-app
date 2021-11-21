@@ -12,7 +12,6 @@ export default function RecipeCard({ recipe, index }) {
           : `/bebidas/${recipe.idDrink}` }
       >
         <img
-          width={ 300 }
           data-testid={ `${index}-card-img` }
           src={ recipe.strMealThumb || recipe.strDrinkThumb }
           alt="Recipe Thumb"

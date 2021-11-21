@@ -9,16 +9,16 @@
 }
 
 .footer img {
-	color: #ffc3ac;
+  color: #ffc3ac;
   filter: invert(94%) sepia(56%)
-		saturate(876%) hue-rotate(296deg)
-		brightness(100%) contrast(102%);
+    saturate(876%) hue-rotate(296deg)
+    brightness(100%) contrast(102%);
 }
 
 .footer img:hover {
-	animation: pulse 2s infinite;
-	box-shadow: 0 0 0 0 black;
-	transform: scale(1);
+  animation: pulse 2s infinite;
+  box-shadow: 0 0 0 0 black;
+  transform: scale(1);
 }
 
 /* fonte: https://www.florin-pop.com/blog/2019/03/css-pulse-effect/ */

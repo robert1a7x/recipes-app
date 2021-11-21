@@ -89,56 +89,61 @@ export default function DrinkDetail() {
 
   if (loading) return <p>Loading...</p>;
   return (
-    <div>
-      <h1 data-testid="recipe-title">{ recipeDetails.strDrink }</h1>
-      <img
-        data-testid="recipe-photo"
-        src={ recipeDetails.strDrinkThumb }
-        alt="Receita"
-      />
-      <button
-        type="button"
-        data-testid="share-btn"
-        onClick={ () => {
-          copy(`http://localhost:3000${pathname}`);
-          setClicked(true);
-        } }
-      >
-        { clicked ? 'Link copiado!' : <img src={ shareIcon } alt="Share icon" /> }
-      </button>
-      <button
-        type="button"
-        onClick={ () => saveFavorite() }
-      >
+    <div className="parent-details">
+      <section className="container-details">
+        <h1 data-testid="recipe-title">{ recipeDetails.strDrink }</h1>
         <img
-          data-testid="favorite-btn"
-          src={ favorite ? blackHeartIcon : whiteHeartIcon }
-          alt="favorite icon"
+          className="recipe-photo"
+          data-testid="recipe-photo"
+          src={ recipeDetails.strDrinkThumb }
+          alt="Receita"
         />
-      </button>
-      <span data-testid="recipe-category">
-        { recipeDetails.strAlcoholic ? 'Alcoholic' : recipeDetails.strCategory }
-      </span>
-      <ul>
-        { ingredients && ingredients.map((ingredient, index) => (
-          <li key={ ingredient } data-testid={ `${index}-ingredient-name-and-measure` }>
-            { ingredients[index] + measures[index] }
-          </li>
-        ))}
-      </ul>
-      <p data-testid="instructions">{recipeDetails.strInstructions }</p>
+        <button
+          type="button"
+          data-testid="share-btn"
+          onClick={ () => {
+            copy(`http://localhost:3000${pathname}`);
+            setClicked(true);
+          } }
+        >
+          { clicked ? 'Link copiado!' : <img src={ shareIcon } alt="Share icon" /> }
+        </button>
+        <button
+          type="button"
+          onClick={ () => saveFavorite() }
+        >
+          <img
+            data-testid="favorite-btn"
+            src={ favorite ? blackHeartIcon : whiteHeartIcon }
+            alt="favorite icon"
+          />
+        </button>
+        <span data-testid="recipe-category">
+          { recipeDetails.strAlcoholic ? 'Alcoholic' : recipeDetails.strCategory }
+        </span>
+        <ul>
+          { ingredients && ingredients.map((ingredient, index) => (
+            <li key={ ingredient } data-testid={ `${index}-ingredient-name-and-measure` }>
+              { ingredients[index] + measures[index] }
+            </li>
+          ))}
+        </ul>
+        <p data-testid="instructions">{recipeDetails.strInstructions }</p>
+      </section>
       <Recommendations items={ foodRecomendations } />
-      { isDone && (
-        <Link to={ `/bebidas/${recipeDetails.idDrink}/in-progress` }>
-          <button
-            className="iniciar-receita"
-            type="button"
-            data-testid="start-recipe-btn"
-            onClick={ () => saveInProgressRecipe() }
-          >
-            { isInProgress ? 'Continuar Receita' : 'Iniciar Receita' }
-          </button>
-        </Link>)}
+      <div className="parent-iniciar-receita">
+        { isDone && (
+          <Link to={ `/bebidas/${recipeDetails.idDrink}/in-progress` }>
+            <button
+              className="iniciar-receita"
+              type="button"
+              data-testid="start-recipe-btn"
+              onClick={ () => saveInProgressRecipe() }
+            >
+              { isInProgress ? 'Continuar Receita' : 'Iniciar Receita' }
+            </button>
+          </Link>)}
+      </div>
     </div>
   );
 }
