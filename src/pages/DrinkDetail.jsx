@@ -157,19 +157,17 @@ export default function DrinkDetail() {
       </section>
 
       <Recommendations items={ foodRecomendations } />
-      <div className="parent-iniciar-receita">
-        { isDone && (
-          <Link to={ `/bebidas/${recipeDetails.idDrink}/in-progress` }>
-            <button
-              className="iniciar-receita"
-              type="button"
-              data-testid="start-recipe-btn"
-              onClick={ () => saveInProgressRecipe() }
-            >
-              { isInProgress ? 'Continuar Receita' : 'Iniciar Receita' }
-            </button>
-          </Link>)}
-      </div>
+      { isDone && (
+        <Link to={ `/bebidas/${recipeDetails.idDrink}/in-progress` }>
+          <button
+            className="btn-action"
+            type="button"
+            data-testid="start-recipe-btn"
+            onClick={ () => saveInProgressRecipe() }
+          >
+            { isInProgress ? 'Continuar Receita' : 'Iniciar Receita' }
+          </button>
+        </Link>)}
     </section>
   );
 }

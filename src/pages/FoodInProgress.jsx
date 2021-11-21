@@ -89,55 +89,65 @@ export default function FoodInProgress() {
   }
 
   return (
-    <div>
-      <h1 data-testid="recipe-title">{ recipeInfo.strMeal }</h1>
-      <img
-        data-testid="recipe-photo"
-        src={ recipeInfo.strMealThumb }
-        alt={ `${recipeInfo.strMeal} Recipe` }
-        width={ 200 }
-      />
-      <div>
-        <button
-          type="button"
-          data-testid="share-btn"
-          onClick={ () => {
-            copy(`http://localhost:3000/comidas/${id}`);
-            setClicked(true);
-          } }
-        >
-          { clicked ? 'Link copiado!' : <img src={ shareIcon } alt="Share icon" /> }
-        </button>
-        <button
-          type="button"
-          onClick={ () => saveFavorite() }
-        >
+    <div className="parent-details">
+      <h1 data-testid="recipe-title" className="title-detail">{ recipeInfo.strMeal }</h1>
+      <section className="container-details">
+        <div className="item-details">
           <img
-            data-testid="favorite-btn"
-            src={ favorite ? blackHeartIcon : whiteHeartIcon }
-            alt="favorite icon"
+            className="recipe-photo"
+            data-testid="recipe-photo"
+            src={ recipeInfo.strMealThumb }
+            alt={ `${recipeInfo.strMeal} Recipe` }
+            width={ 200 }
           />
-        </button>
-      </div>
-      <h2 data-testid="recipe-category">{ recipeInfo.strCategory }</h2>
-      <ul>
-        { ingredients && ingredients.map((ingredient, index) => (
-          <li key={ ingredient } data-testid={ `${index}-ingredient-step` }>
-            <input
-              className="checkbox"
-              type="checkbox"
-              value={ ingredient }
-              onChange={ (e) => handleChange(e.target.value) }
-              checked={
-                selectedItems.includes(ingredient)
-              }
+          <h2 data-testid="recipe-category">{ recipeInfo.strCategory }</h2>
+          <button
+            className="icons"
+            type="button"
+            data-testid="share-btn"
+            onClick={ () => {
+              copy(`http://localhost:3000/comidas/${id}`);
+              setClicked(true);
+            } }
+          >
+            { clicked ? 'Link copiado!' : <img src={ shareIcon } alt="Share icon" /> }
+          </button>
+          <button
+            className="icons"
+            type="button"
+            onClick={ () => saveFavorite() }
+          >
+            <img
+              data-testid="favorite-btn"
+              src={ favorite ? blackHeartIcon : whiteHeartIcon }
+              alt="favorite icon"
             />
-            { `${ingredients[index]}  ${measures[index]}` }
-          </li>
-        ))}
-      </ul>
-      <p data-testid="instructions">{ recipeInfo.strInstructions }</p>
+          </button>
+        </div>
+        <div className="item-details">
+          <ul>
+            { ingredients && ingredients.map((ingredient, index) => (
+              <li key={ ingredient } data-testid={ `${index}-ingredient-step` }>
+                <input
+                  className="checkbox"
+                  type="checkbox"
+                  value={ ingredient }
+                  onChange={ (e) => handleChange(e.target.value) }
+                  checked={
+                    selectedItems.includes(ingredient)
+                  }
+                />
+                { `${ingredients[index]}  ${measures[index]}` }
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="item-details">
+          <p data-testid="instructions">{ recipeInfo.strInstructions }</p>
+        </div>
+      </section>
       <button
+        className="btn-action"
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ (selectedItems.length !== ingredients.length) }
