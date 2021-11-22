@@ -127,7 +127,7 @@ export default function DrinksInProgress() {
           <h2 data-testid="recipe-category">{ recipeInfo.strCategory }</h2>
         </div>
         <div className="item-details">
-          <ul>
+          <ul style={ { listStyle: 'none' } }>
             { ingredients && ingredients.map((ingredient, index) => (
               <li key={ ingredient } data-testid={ `${index}-ingredient-step` }>
                 <input
@@ -139,7 +139,7 @@ export default function DrinksInProgress() {
                     selectedItems.includes(ingredient)
                   }
                 />
-                { `${ingredients[index]}  ${measures[index]}` }
+                { `${ingredients[index]} - ${measures[index]}` }
               </li>
             ))}
           </ul>

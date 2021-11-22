@@ -110,7 +110,7 @@ export default function FoodDetail() {
             alt={ `${recipeDetails.strMeal} Recipe` }
             width={ 200 }
           />
-          <span data-testid="recipe-category">{ recipeDetails.strCategory }</span>
+          <p data-testid="recipe-category">{ recipeDetails.strCategory }</p>
           <br />
           <button
             className="icons"
@@ -141,7 +141,7 @@ export default function FoodDetail() {
               key={ ingredient }
               data-testid={ `${index}-ingredient-name-and-measure` }
             >
-              { ingredients[index] + measures[index] }
+              { `${ingredients[index]} - ${measures[index]}` }
             </li>
           ))}
         </ul>

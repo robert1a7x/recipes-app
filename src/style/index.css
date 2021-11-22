@@ -90,7 +90,9 @@ html {
 
 .icons {
   margin-right: 5px;
-  width: 100px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .btn-action {

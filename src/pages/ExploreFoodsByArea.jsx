@@ -6,6 +6,8 @@ import RecipeCard from '../components/RecipeCard';
 import fetchAPI from '../helpers/fetchAPI';
 import { useAppContext } from '../context/Provider';
 
+import '../style/ExploreByArea.css';
+
 export default function ExploreFoodsByArea() {
   const [categories, setCategories] = useState([]);
   const [recipes, setRecipes] = useState([]);
@@ -55,10 +57,12 @@ export default function ExploreFoodsByArea() {
           </option>
         ))}
       </select>
-      { recipes && recipes.map((recipe, index) => (
-        (index < MAX_ITEMS)
-        && <RecipeCard recipe={ recipe } index={ index } key={ recipe } />
-      ))}
+      <div className="explore-local">
+        { recipes && recipes.map((recipe, index) => (
+          (index < MAX_ITEMS)
+          && <RecipeCard recipe={ recipe } index={ index } key={ recipe } />
+        ))}
+      </div>
       <Footer />
     </div>
   );

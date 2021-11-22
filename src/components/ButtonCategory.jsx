@@ -40,7 +40,6 @@ export default function ButtonCategory({ setAll, all, fetchRecipes }) {
   return (
     <div>
       <button
-        className="btn-category"
         type="button"
         data-testid="All-category-filter"
         onClick={ () => fetchAllCategories() }
@@ -50,7 +49,6 @@ export default function ButtonCategory({ setAll, all, fetchRecipes }) {
       { categories && categories.map((category, index) => (
         index < CINCO && (
           <button
-            className="btn-category"
             type="button"
             key={ index }
             data-testid={ `${category.strCategory}-category-filter` }

@@ -39,6 +39,11 @@
   font-weight: 700;
 }
 
+.item-details input {
+  margin-right: 10px;
+  transform: scale(1.5);
+}
+
 .video-detail {
   text-align: center;
 }

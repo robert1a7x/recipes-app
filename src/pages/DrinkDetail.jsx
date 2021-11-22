@@ -111,9 +111,9 @@ export default function DrinkDetail() {
             alt="Receita"
           />
 
-          <span data-testid="recipe-category">
+          <p data-testid="recipe-category">
             { recipeDetails.strAlcoholic ? 'Alcoholic' : recipeDetails.strCategory }
-          </span>
+          </p>
           <br />
           <button
             className="icons"
@@ -142,7 +142,7 @@ export default function DrinkDetail() {
         <ul className="item-details">
           { ingredients && ingredients.map((ingredient, index) => (
             <li key={ ingredient } data-testid={ `${index}-ingredient-name-and-measure` }>
-              { ingredients[index] + measures[index] }
+              { `${ingredients[index]} - ${measures[index]}` }
             </li>
           ))}
         </ul>

@@ -125,7 +125,7 @@ export default function FoodInProgress() {
           </button>
         </div>
         <div className="item-details">
-          <ul>
+          <ul style={ { listStyle: 'none' } }>
             { ingredients && ingredients.map((ingredient, index) => (
               <li key={ ingredient } data-testid={ `${index}-ingredient-step` }>
                 <input
@@ -137,7 +137,7 @@ export default function FoodInProgress() {
                     selectedItems.includes(ingredient)
                   }
                 />
-                { `${ingredients[index]}  ${measures[index]}` }
+                { `${ingredients[index]} - ${measures[index]}` }
               </li>
             ))}
           </ul>
