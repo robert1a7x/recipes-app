@@ -185,7 +185,6 @@ html {
   z-index: 0;
 }
 
-
 .card-food:hover {
   background-color: #e6e6e6;
 }
@@ -222,10 +221,8 @@ html {
   font-size: 2.3vw;
 }
 
-
 .food-cards-section {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
-
