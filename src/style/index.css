@@ -126,3 +126,44 @@ html {
   color: white;
 }
 
+/* Explore */
+.parent-explore {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  overflow: hidden;
+  width: 100vw;
+}
+
+.item-explore {
+  align-items: center;
+  background-color: rgb(232, 232, 232);
+  border: 0;
+  border-radius: 15px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0 50px 100px -20px , rgba(0, 0, 0, 0.3)
+    0 30px 60px -30px , rgba(40, 41, 43, 0.35) 0 -2px 6px 0 inset;
+  display: flex;
+  flex-wrap: wrap;
+  height: 200px;
+  justify-content: center;
+  margin: 1rem;
+  padding: 1rem;
+  text-decoration: none;
+  width: 150px;
+}
+
+.img-explore {
+  border-radius: 4px;
+  width: 100px;
+}
+
+.img-explore:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.item-explore button {
+  border: 0;
+}
+

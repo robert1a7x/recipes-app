@@ -5,6 +5,9 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 import fetchAPI from '../helpers/fetchAPI';
+import location from '../images/localidade.jpeg';
+import Ingredients from '../images/ingredientes.jpeg';
+import surprise from '../images/surprise.jpg';
 
 export default function ExploreFoods() {
   const history = useHistory();
@@ -18,29 +21,42 @@ export default function ExploreFoods() {
   return (
     <div>
       <Header title="Explorar Comidas" />
-      <Link to="/explorar/comidas/ingredientes">
-        <button
-          type="button"
-          data-testid="explore-by-ingredient"
+      <div className="parent-explore">
+        <Link
+          to="/explorar/comidas/ingredientes"
+          className="item-explore"
         >
-          Por Ingredientes
-        </button>
-      </Link>
-      <Link to="/explorar/comidas/area">
-        <button
-          type="button"
-          data-testid="explore-by-area"
-        >
-          Por Local de Origem
-        </button>
-      </Link>
-      <button
-        type="button"
-        data-testid="explore-surprise"
-        onClick={ () => generateRandomRecipe() }
-      >
-        Me Surpreenda!
-      </button>
+          <button
+            type="button"
+            data-testid="explore-by-ingredient"
+          >
+            <img src={ Ingredients } alt={ Ingredients } className="img-explore" />
+            <br />
+            Por Ingredientes
+          </button>
+        </Link>
+        <Link to="/explorar/comidas/area" className="item-explore">
+          <button
+            type="button"
+            data-testid="explore-by-area"
+          >
+            <img src={ location } alt={ location } className="img-explore" />
+            <br />
+            Por Local de Origem
+          </button>
+        </Link>
+        <div className="item-explore">
+          <button
+            type="button"
+            data-testid="explore-surprise"
+            onClick={ () => generateRandomRecipe() }
+          >
+            <img src={ surprise } alt={ surprise } className="img-explore" />
+            <br />
+            Me Surpreenda!
+          </button>
+        </div>
+      </div>
       <Footer />
     </div>
   );
