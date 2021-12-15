@@ -19,6 +19,7 @@ export default function FoodDetail() {
   const [clicked, setClicked] = useState(false);
   const [favorite, setFavorite] = useState();
   const [drinkRecomendations, setDrinkRecomendations] = useState([]);
+  const [updatedFavorites, setUpdatedFavorites] = useState([]);
 
   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
   const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
@@ -72,7 +73,16 @@ export default function FoodDetail() {
         image: recipeDetails.strMealThumb,
       },
     ];
-    localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteMeal));
+    
+    if (!favorite) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteMeal));
+      setUpdatedFavorites(newFavoriteMeal);
+    } else {
+      const filterRecipe = updatedFavorites.filter((r) => r.id !== id);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(filterRecipe));
+      setUpdatedFavorites(filterRecipe);
+    }
+
     setFavorite(!favorite);
   }
 
