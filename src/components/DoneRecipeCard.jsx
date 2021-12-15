@@ -54,6 +54,7 @@ export default function DoneRecipeCard({ recipe, index }) {
           <p data-testid={ `${index}-horizontal-top-text` }>{alcoholicOrNot}</p>)}
       <p data-testid={ `${index}-horizontal-done-date` }>
         Feita em:
+        { ' ' }
         {doneDate}
       </p>
       <button
@@ -81,9 +82,7 @@ DoneRecipeCard.propTypes = {
     id: PropTypes.string,
     image: PropTypes.string,
     name: PropTypes.string,
-    tags: PropTypes.shape({
-      map: PropTypes.func,
-    }),
+    tags: PropTypes.array,
     type: PropTypes.string,
   }).isRequired,
 };

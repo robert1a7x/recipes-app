@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router';
-import copy from 'clipboard-copy';
 import { useAppContext } from '../context/Provider';
 import {
   saveIngredient,
@@ -9,9 +8,6 @@ import {
 } from '../helpers/saveInLocalStorage';
 
 import '../style/Detail.css';
-import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
 import fetchAPI from '../helpers/fetchAPI';
 
 export default function FoodInProgress() {
@@ -22,20 +18,12 @@ export default function FoodInProgress() {
   const newIngredient = { cocktails: {}, meals: { [id]: [] } };
 
   const [recipeInfo, setRecipeInfo] = useState([]);
-  const [clicked, setClicked] = useState(false);
-  const [favorite, setFavorite] = useState();
   const [selectedItems, setSelectedItems] = useState([]);
   const { loading, setLoading } = useAppContext();
 
-  // const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-  const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-
-  const isFavorite = favoriteRecipes ? favoriteRecipes
-    .some((obj) => obj.id === id)
-    : localStorage.setItem('favoriteRecipes', JSON.stringify([]));
-
   const ingredients = getIngredients(recipeInfo);
   const measures = getMeasures(recipeInfo);
+  const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
 
   useEffect(() => {
     async function getRecipe() {
@@ -45,7 +33,6 @@ export default function FoodInProgress() {
         ? inProgressRecipes.meals[id]
         : localStorage.setItem('inProgressRecipes', JSON.stringify(newIngredient));
       setRecipeInfo(recipe[0]);
-      setFavorite(isFavorite);
       if (usedIngredients) setSelectedItems(usedIngredients);
       setLoading(false);
     }
@@ -57,23 +44,6 @@ export default function FoodInProgress() {
     saveIngredient(inProgressRecipes, selectedItems, 'meals', id);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedItems]);
-
-  function saveFavorite() {
-    const newFavoriteMeal = [
-      ...favoriteRecipes,
-      {
-        id: recipeInfo.idMeal,
-        type: 'comida',
-        area: recipeInfo.strArea,
-        category: recipeInfo.strCategory,
-        alcoholicOrNot: '',
-        name: recipeInfo.strMeal,
-        image: recipeInfo.strMealThumb,
-      },
-    ];
-    localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteMeal));
-    setFavorite(!favorite);
-  }
 
   function handleChange(value) {
     return (selectedItems.includes(value))
@@ -88,6 +58,32 @@ export default function FoodInProgress() {
       </section>);
   }
 
+  function completeRecipe() {
+    const today = new Date();
+    let date = `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`;
+
+    if (!localStorage.doneRecipes) {
+      localStorage.setItem('doneRecipes', JSON.stringify([]));
+    } else {
+      const newCompletedRecipe = [
+        ...doneRecipes,
+        {
+          id: recipeInfo.idMeal,
+          type: 'comida',
+          area: recipeInfo.strArea,
+          category: recipeInfo.strCategory,
+          alcoholicOrNot: recipeInfo.strAlcoholic,
+          name: recipeInfo.strMeal,
+          image: recipeInfo.strMealThumb,
+          doneDate: date,
+          tags: recipeInfo.strTags ? recipeInfo.strTags.split(',') : [],
+        },
+      ];
+
+      localStorage.setItem('doneRecipes', JSON.stringify(newCompletedRecipe));
+    }
+  }
+
   return (
     <div className="parent-details">
       <h1 data-testid="recipe-title" className="title-detail">{ recipeInfo.strMeal }</h1>
@@ -100,29 +96,7 @@ export default function FoodInProgress() {
             alt={ `${recipeInfo.strMeal} Recipe` }
             width={ 200 }
           />
-          <h2 data-testid="recipe-category">{ recipeInfo.strCategory }</h2>
-          <button
-            className="icons"
-            type="button"
-            data-testid="share-btn"
-            onClick={ () => {
-              copy(`http://localhost:3000/comidas/${id}`);
-              setClicked(true);
-            } }
-          >
-            { clicked ? 'Link copiado!' : <img src={ shareIcon } alt="Share icon" /> }
-          </button>
-          <button
-            className="icons"
-            type="button"
-            onClick={ () => saveFavorite() }
-          >
-            <img
-              data-testid="favorite-btn"
-              src={ favorite ? blackHeartIcon : whiteHeartIcon }
-              alt="favorite icon"
-            />
-          </button>
+          <h2 data-testid="recipe-category">Categoria: { recipeInfo.strCategory }</h2>
         </div>
         <div className="item-details">
           <ul style={ { listStyle: 'none' } }>
@@ -151,20 +125,13 @@ export default function FoodInProgress() {
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ (selectedItems.length !== ingredients.length) }
-        onClick={ () => history.push('/receitas-feitas') }
+        onClick={ () => {
+          completeRecipe();
+          history.push('/receitas-feitas')
+        } }
       >
         Finalizar Receita
       </button>
     </div>
   );
 }
-// function checkedIngredient(ingredientName) {
-//   const newIngredients = ingredients.map(({ name, measure, checked }) => {
-//     if (name === ingredientName) {
-//       return { name, measure, checked: !checked };
-//     }
-//     return { name, measure, checked };
-//   });
-//   setIngredients(newIngredients);
-//   setLocalStorage(newIngredients);
-// }

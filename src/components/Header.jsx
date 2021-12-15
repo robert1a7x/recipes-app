@@ -46,7 +46,7 @@ export default function Header({ title, searchButton }) {
 }
 
 Header.propTypes = {
-  props: PropTypes.shape({}).isRequired,
+  props: PropTypes.shape({}),
   title: PropTypes.string.isRequired,
-  searchButton: PropTypes.string.isRequired,
+  searchButton: PropTypes.bool,
 };
