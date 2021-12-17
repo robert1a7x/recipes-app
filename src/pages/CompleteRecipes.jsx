@@ -33,7 +33,7 @@ export default function CompleteRecipes() {
     <div>
       <Header title="Receitas Feitas" />
       Tela de receitas prontas
-      <div>
+      <div style={ { marginTop: '60px' } } className="btn-categories">
         <button
           type="button"
           data-testid="filter-by-all-btn"
@@ -56,9 +56,11 @@ export default function CompleteRecipes() {
           Drink
         </button>
       </div>
-      { doneRecipes && doneRecipes.map((recipe, index) => (
-        <DoneRecipeCard key={ index } recipe={ recipe } index={ index } />
-      )) }
+      <div className="done-recipes-container">
+        { doneRecipes && doneRecipes.map((recipe, index) => (
+          <DoneRecipeCard key={ index } recipe={ recipe } index={ index } />
+        )) }
+      </div>
     </div>
   );
 }

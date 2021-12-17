@@ -20,7 +20,7 @@ export default function DoneRecipeCard({ recipe, index }) {
   } = recipe;
 
   return (
-    <div>
+    <div className="done-recipe-card">
       <Link to={ `/${type}s/${id}` }>
         <img
           style={ { width: '200px' } }

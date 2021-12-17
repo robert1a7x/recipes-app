@@ -35,30 +35,34 @@ export default function FavoriteRecipes() {
     <div>
       <Header title="Receitas Favoritas" />
       Tela de receitas favoritas
-      <button
-        type="button"
-        data-testid="filter-by-all-btn"
-        onClick={ (event) => filterBy(event) }
-      >
-        All
-      </button>
-      <button
-        onClick={ (event) => filterBy(event) }
-        type="button"
-        data-testid="filter-by-food-btn"
-      >
-        Food
-      </button>
-      <button
-        type="button"
-        data-testid="filter-by-drink-btn"
-        onClick={ (event) => filterBy(event) }
-      >
-        Drink
-      </button>
-      {favoriteRecipe && favoriteRecipe.map((recipe, index) => (
-        <FavoriteRecipeCard key={ index } recipe={ recipe } index={ index } />
-      ))}
+      <div className="btn-categories">
+        <button
+          type="button"
+          data-testid="filter-by-all-btn"
+          onClick={ (event) => filterBy(event) }
+        >
+          All
+        </button>
+        <button
+          onClick={ (event) => filterBy(event) }
+          type="button"
+          data-testid="filter-by-food-btn"
+        >
+          Food
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-drink-btn"
+          onClick={ (event) => filterBy(event) }
+        >
+          Drink
+        </button>
+      </div>
+      <div className="done-recipes-container">
+        {favoriteRecipe && favoriteRecipe.map((recipe, index) => (
+          <FavoriteRecipeCard key={ index } recipe={ recipe } index={ index } />
+        ))}
+      </div>
     </div>
   );
 }

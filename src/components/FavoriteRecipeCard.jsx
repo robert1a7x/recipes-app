@@ -32,7 +32,7 @@ export default function FavoriteRecipeCard({ recipe, index }) {
   };
 
   return (
-    <div>
+    <div className="done-recipe-card">
       <Link to={ `/${type}s/${id}` }>
         <img
           style={ { width: '200px' } }
@@ -54,25 +54,29 @@ export default function FavoriteRecipeCard({ recipe, index }) {
         </div>)
         : (
           <p data-testid={ `${index}-horizontal-top-text` }>{alcoholicOrNot}</p>)}
-      <button
-        type="button"
-        src={ shareIcon }
-        data-testid={ `${index}-horizontal-share-btn` }
-        onClick={ () => {
-          copy(`http://localhost:3000/${type}s/${id}`);
-          setClicked(true);
-        } }
-      >
-        {clicked ? 'Link copiado!' : <img src={ shareIcon } alt="Share icon" />}
-      </button>
-      <button
-        type="button"
-        src={ blackHeartIcon }
-        data-testid={ `${index}-horizontal-favorite-btn` }
-        onClick={ () => excludeFavorite() }
-      >
-        <img src={ blackHeartIcon } alt={ blackHeartIcon } />
-      </button>
+      <div>
+        <button
+          style={ { margin: '0 5px' } }
+          type="button"
+          src={ shareIcon }
+          data-testid={ `${index}-horizontal-share-btn` }
+          onClick={ () => {
+            copy(`http://localhost:3000/${type}s/${id}`);
+            setClicked(true);
+          } }
+        >
+          {clicked ? 'Link copiado!' : <img src={ shareIcon } alt="Share icon" />}
+        </button>
+        <button
+          type="button"
+          src={ blackHeartIcon }
+          data-testid={ `${index}-horizontal-favorite-btn` }
+          onClick={ () => excludeFavorite() }
+          style={ { margin: '0 5px' } }
+        >
+          <img src={ blackHeartIcon } alt={ blackHeartIcon } />
+        </button>
+      </div>
     </div>
   );
 }

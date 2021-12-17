@@ -238,6 +238,7 @@ html {
 
 .ingredient {
   align-items: center;
+  background-color: rgb(245, 245, 245);
   border-radius: 4px;
   box-shadow: rgb(0 0 0 / 24%) 0 3px 8px;
   display: flex;
@@ -248,6 +249,54 @@ html {
 }
 
 .ingredient a {
-  text-decoration: none;
   color: black;
+  text-decoration: none;
+}
+
+/* Done recipes */
+
+.done-recipes-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.done-recipe-card {
+  align-items: center;
+  background-color: rgb(245, 245, 245);
+  border-radius: 4px;
+  box-shadow: rgb(0 0 0 / 24%) 0 3px 8px;
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  justify-content: space-between;
+  margin: 15px 15px;
+  padding: 15px;
+  width: 250px;
+}
+
+.done-recipe-card img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.done-recipe-card a {
+  color: rgb(214, 84, 84);
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.done-recipe-card ol {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  justify-content: center;
+}
+
+.done-recipe-card li {
+  background-color: rgb(255, 154, 154);
+  border-radius: 4px;
+  padding: 2px 6px;
+  margin: 0 4px;
 }
