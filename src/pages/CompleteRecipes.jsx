@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import DoneRecipeCard from '../components/DoneRecipeCard';
+import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 export default function CompleteRecipes() {
@@ -61,6 +62,7 @@ export default function CompleteRecipes() {
           <DoneRecipeCard key={ index } recipe={ recipe } index={ index } />
         )) }
       </div>
+      <Footer />
     </div>
   );
 }

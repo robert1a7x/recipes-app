@@ -260,6 +260,7 @@ html {
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 20px;
+  margin-bottom: 60px;
 }
 
 .done-recipe-card {

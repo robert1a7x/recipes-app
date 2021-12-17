@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 import Header from '../components/Header';
 import FavoriteRecipeCard from '../components/FavoriteRecipeCard';
+import Footer from '../components/Footer';
 
 export default function FavoriteRecipes() {
   const [favoriteRecipe, setFavoriteRecipe] = useState([]);
@@ -63,6 +64,7 @@ export default function FavoriteRecipes() {
           <FavoriteRecipeCard key={ index } recipe={ recipe } index={ index } />
         ))}
       </div>
+      <Footer />
     </div>
   );
 }
