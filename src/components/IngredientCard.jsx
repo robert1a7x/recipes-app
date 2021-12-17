@@ -25,21 +25,34 @@ export default function IngredientCard({ ingredient, index }) {
   }
 
   return (
-    <Link
-      to={ ' ' }
-      onClick={ () => filterByIngredient() }
-    >
-      <div data-testid={ `${index}-ingredient-card` }>
-        <img
-          data-testid={ `${index}-card-img` }
-          src={ strIngredient ? srcMeal : srcDrink }
-          alt="Ingredient Thumb"
-        />
-        <h3 data-testid={ `${index}-card-name` }>
-          { strIngredient || strIngredient1 }
-        </h3>
-      </div>
-    </Link>
+    <div className="ingredient">
+      <Link
+        to={ ' ' }
+        onClick={ () => filterByIngredient() }
+      >
+        <div 
+          data-testid={ `${index}-ingredient-card` }
+          style={ { 
+            display: 'flex',
+            justifyContent: 'space-between',
+            flexWrap: 'nowrap',
+            flexDirection: 'column',
+            width: '200px',
+            height: '250px',
+            padding: '10px'
+          } }
+        >
+          <img
+            data-testid={ `${index}-card-img` }
+            src={ strIngredient ? srcMeal : srcDrink }
+            alt="Ingredient Thumb"
+          />
+          <h3 style={ { textAlign: 'center'} } data-testid={ `${index}-card-name` }>
+            { strIngredient || strIngredient1 }
+          </h3>
+        </div>
+      </Link>
+    </div>
   );
 }
 

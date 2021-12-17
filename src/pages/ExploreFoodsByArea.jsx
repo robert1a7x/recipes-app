@@ -60,7 +60,7 @@ export default function ExploreFoodsByArea() {
       <div className="explore-local">
         { recipes && recipes.map((recipe, index) => (
           (index < MAX_ITEMS)
-          && <RecipeCard recipe={ recipe } index={ index } key={ recipe } />
+          && <RecipeCard recipe={ recipe } index={ index } key={ index } />
         ))}
       </div>
       <Footer />

@@ -29,10 +29,12 @@ export default function ExploreDrinksByIngredients() {
   return (
     <div>
       <Header title="Explorar Ingredientes" />
-      { ingredients && ingredients.map((ingredient, index) => (
-        (index < MAX_ITEMS)
-        && <IngredientCard ingredient={ ingredient } index={ index } key={ ingredient } />
-      ))}
+      <div className="ingredients-container">
+        { ingredients && ingredients.map((ingredient, index) => (
+          (index < MAX_ITEMS)
+          && <IngredientCard ingredient={ ingredient } index={ index } key={ index } />
+        ))}
+      </div>
       <Footer />
     </div>
   );

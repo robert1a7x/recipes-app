@@ -18,12 +18,10 @@ export default function ButtonCategory({ setAll, all, fetchRecipes }) {
         // endpoint https://www.themealdb.com/api/json/v1/1/list.php?c=list
     );
     fetchCategories();
-    console.log(categories, 'teste');
   }, []);
 
   const fetchByCategory = async (value) => {
     if (value === stateButton) {
-      console.log(value);
       fetchRecipes();
       return setStateButton('');
     }

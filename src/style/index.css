@@ -105,7 +105,6 @@ html {
   margin: 1rem;
   margin-left: 5rem;
   padding: 20px 50px;
-  position: fixed;
   text-transform: uppercase;
 }
 
@@ -141,33 +140,33 @@ html {
 
 .item-explore {
   align-items: center;
-  background-color: rgb(232, 232, 232);
+  background-color: rgb(240, 240, 240);
   border: 0;
-  border-radius: 15px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0 50px 100px -20px , rgba(0, 0, 0, 0.3)
-    0 30px 60px -30px , rgba(40, 41, 43, 0.35) 0 -2px 6px 0 inset;
+  border-radius: 6px;
+  box-shadow: rgb(0 0 0 / 24%) 0 3px 8px;
   display: flex;
   flex-wrap: wrap;
-  height: 200px;
+  height: 350px;
   justify-content: center;
-  margin: 1rem;
+  margin: 1.6rem;
   padding: 1rem;
   text-decoration: none;
-  width: 150px;
+  width: 250px;
+}
+
+.item-explore button {
+  font-size: 19px;
+  border: 0;
 }
 
 .img-explore {
   border-radius: 4px;
-  width: 100px;
+  width: 85%;
 }
 
 .img-explore:hover {
   cursor: pointer;
   opacity: 0.8;
-}
-
-.item-explore button {
-  border: 0;
 }
 
 /* Card food */
@@ -226,4 +225,29 @@ html {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+/* Explore by ingredients */
+
+.ingredients-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 90px;
+  justify-content: center;
+}
+
+.ingredient {
+  align-items: center;
+  border-radius: 4px;
+  box-shadow: rgb(0 0 0 / 24%) 0 3px 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 15px 15px;
+  width: 250px;
+}
+
+.ingredient a {
+  text-decoration: none;
+  color: black;
 }

@@ -17,6 +17,7 @@ export default function Explore() {
           >
             <img src={ meal } alt={ meal } className="img-explore" />
             <br />
+            <br />
             Explorar Comidas
           </button>
         </Link>
@@ -27,6 +28,7 @@ export default function Explore() {
             data-testid="explore-drinks"
           >
             <img src={ drink } alt={ drink } className="img-explore" />
+            <br />
             <br />
             Explorar Bebidas
           </button>

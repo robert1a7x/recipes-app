@@ -32,6 +32,7 @@ export default function ExploreFoods() {
           >
             <img src={ Ingredients } alt={ Ingredients } className="img-explore" />
             <br />
+            <br />
             Por Ingredientes
           </button>
         </Link>
@@ -41,6 +42,7 @@ export default function ExploreFoods() {
             data-testid="explore-by-area"
           >
             <img src={ location } alt={ location } className="img-explore" />
+            <br />
             <br />
             Por Local de Origem
           </button>
@@ -52,6 +54,7 @@ export default function ExploreFoods() {
             onClick={ () => generateRandomRecipe() }
           >
             <img src={ surprise } alt={ surprise } className="img-explore" />
+            <br />
             <br />
             Me Surpreenda!
           </button>
