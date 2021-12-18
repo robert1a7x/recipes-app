@@ -33,6 +33,7 @@ A base de dados serão 2 APIs distintas, uma para comidas e outra para bebidas. 
 
 ##  APIs utilizadas
 > https://www.themealdb.com/api.php
+> 
 > https://www.thecocktaildb.com/api.php
 
 
@@ -49,3 +50,5 @@ cd recipes-app/ && npm start
 ```
 
 ## Gif da aplicação
+
+![recipes-app (1)-min](https://user-images.githubusercontent.com/79478208/146651392-f7298aa7-f61b-4584-ad3d-573f6fb0b983.gif)
